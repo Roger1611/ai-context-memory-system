@@ -1,0 +1,23 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+
+# Runtime data (do not store conversations in git)
+data/raw_conversations/
+data/processed_memory/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
