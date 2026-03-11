@@ -12,9 +12,8 @@ env/
 .vscode/
 
 # Runtime data (do not store conversations in git)
-data/raw_conversations/
-data/processed_memory/
-
+data/raw_conversations/*
+data/projects/*/vector_index/*
 # Logs
 *.log
 
