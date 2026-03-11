@@ -1,0 +1,44 @@
+[
+  {
+    "project": "default_project",
+    "topic": "LLM Memory Extraction Engine",
+    "type": "design decision",
+    "content": "The extraction stage will include durable knowledge filtering, memory packet schema, automatic topic clustering, and structured outputs from Llama.",
+    "source_conversation": "conv_5204977e"
+  },
+  {
+    "project": "default_project",
+    "topic": "Memory Packet Schema",
+    "type": "schema enforcement",
+    "content": "The prompt must enforce a strict schema like 'conversation_id': ..., 'text': ..., 'entities': ... to produce structured durable knowledge.",
+    "source_conversation": "conv_5204977e"
+  },
+  {
+    "project": "default_project",
+    "topic": "Ollama and Llama Model Configuration",
+    "type": "configuration",
+    "content": "The system will use local Ollama + Llama 3.1 model as the default LLM backend, with a modular adapter layer allowing integration with other LLM providers.",
+    "source_conversation": "conv_5204977e"
+  },
+  {
+    "project": "default_project",
+    "topic": "Memory Extraction Engine Architecture",
+    "type": "system architecture",
+    "content": "Pipeline: Conversation ingestion -> Memory extraction engine -> LLM call -> Parse structured output -> Store memory packets.",
+    "source_conversation": "conv_5204977e"
+  },
+  {
+    "project": "default_project",
+    "topic": "JSON-safe Extraction Fix for Llama Model",
+    "type": "fix",
+    "content": "Small 8B models often produce slightly broken JSON, and fixing this now will save debugging later.",
+    "source_conversation": "conv_5204977e"
+  },
+  {
+    "project": "default_project",
+    "topic": "Semantic Memory Retrieval",
+    "type": "system architecture",
+    "content": "The next module will make the system actually useful: Semantic Memory Retrieval enables generating context prompts that work in any AI assistant.",
+    "source_conversation": "conv_5204977e"
+  }
+]

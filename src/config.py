@@ -15,3 +15,6 @@ LLM_PROVIDER = "ollama"
 OLLAMA_BASE_URL = "http://localhost:11434"
 
 OLLAMA_MODEL = "llama3.1:8b-instruct-q4_K_M"
+# Vector index storage
+VECTOR_INDEX_DIR = PROJECT_ROOT / "data" / "vector_index"
+VECTOR_INDEX_DIR.mkdir(parents=True, exist_ok=True)
