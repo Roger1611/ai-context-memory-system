@@ -1,36 +1,63 @@
 def build_extraction_prompt(conversation_text):
 
-    prompt = f"""
-You are an AI system that extracts durable project knowledge.
+    return f"""
+You are a system that extracts structured project knowledge from AI conversations.
 
-Your job is to read a conversation and extract only information
-that represents lasting knowledge about a project.
+Your task is to identify important project information and return it in JSON format.
 
-Ignore greetings, filler text, and casual conversation.
+IMPORTANT RULES:
+- Output ONLY JSON.
+- Do NOT include explanations.
+- Do NOT include text before or after the JSON.
+- The JSON must be a list of objects.
 
-Extract:
+Each object must have:
 
-- experiment results
-- design decisions
-- architecture details
-- constraints
-- important insights
+topic
+type
+content
 
-Return ONLY JSON in this format:
+Example:
 
 [
   {{
-    "topic": "...",
-    "type": "...",
-    "content": "..."
+    "topic": "architecture",
+    "type": "system_design",
+    "content": "The system uses Playwright to ingest share links and FAISS for semantic retrieval."
+  }},
+  {{
+    "topic": "current_progress",
+    "type": "project_state",
+    "content": "Conversation ingestion and memory extraction modules are implemented."
   }}
 ]
 
-Conversation:
+Extract information about:
+
+- project goal
+- problem statement
+- system architecture
+- repository structure
+- completed components
+- current progress
+- important technical decisions
+- algorithms used
+- datasets used
+- experiments performed
+- code modules or files implemented
+- open questions
+- next steps
+- limitations
+
+Only include information that appears in the conversation.
+
+Conversation starts below.
+
+-----BEGIN CONVERSATION-----
 
 {conversation_text}
 
-JSON:
-"""
+-----END CONVERSATION-----
 
-    return prompt
+Return JSON only.
+"""

@@ -1,57 +1,92 @@
+"""
+memory_extractor.py
+
+Converts raw conversations into structured memory packets.
+Handles imperfect LLM output safely.
+"""
 
 import json
+import ast
 from pathlib import Path
+
 from src.llm import generate_response
 from src.extraction.extraction_prompt import build_extraction_prompt
 from src.extraction.schema import create_memory_packet
-from src.config import RAW_CONVO_DIR, PROCESSED_MEMORY_DIR
+from src.config import PROCESSED_MEMORY_DIR
+
 
 def extract_memory_from_conversation(file_path: Path):
 
     print(f"\n[INFO] Processing conversation: {file_path.name}")
+
     with open(file_path, "r", encoding="utf-8") as f:
         conversation_data = json.load(f)
+
     conversation_id = conversation_data["conversation_id"]
     messages = conversation_data["messages"]
-    conversation_text = "\n".join(
-        m["content"] for m in messages
-    )
+
+    # Combine conversation text
+    conversation_text = "\n".join(m["content"] for m in messages)
 
     prompt = build_extraction_prompt(conversation_text)
+
     print("[INFO] Sending conversation to LLM...")
+
     response = generate_response(prompt)
 
-    import re
+    print("\n[DEBUG] MODEL RESPONSE:\n")
+    print(response)
 
+    # -------------------------------
+    # Robust parsing of model output
+    # -------------------------------
     try:
-        json_match = re.search(r"\[.*\]", response, re.DOTALL)
 
-        if not json_match:
-            raise ValueError("No JSON array found in response")
+        # Case 1: Already a Python object (if generate_response parsed JSON)
+        if isinstance(response, list):
+            extracted_items = response
 
-        json_text = json_match.group(0)
+        # Case 2: Try standard JSON
+        else:
+            try:
+                extracted_items = json.loads(response)
+            except Exception:
+                # Case 3: Python literal (single quotes)
+                extracted_items = ast.literal_eval(response)
 
-        extracted_items = json.loads(json_text)
+        if not isinstance(extracted_items, list):
+            raise ValueError("Model output is not a list")
 
-    except Exception:
+    except Exception as e:
 
-        print("[WARNING] Model returned unparsable output")
-        print(response)
+        print("[WARNING] Failed to parse model output")
+        print(e)
         return []
 
     packets = []
 
     for item in extracted_items:
 
+        # Defensive parsing
+        topic = item.get("topic", "general")
+        packet_type = item.get("type", "knowledge")
+        content = str(item.get("content", "")).strip()
+
+        if not content:
+            continue
+
         packet = create_memory_packet(
-            project="default_project",
-            topic=item["topic"],
-            packet_type=item["type"],
-            content=item["content"],
+            project="ai_context_memory_system",
+            topic=topic,
+            packet_type=packet_type,
+            content=content,
             source_conversation=conversation_id
         )
 
         packets.append(packet)
+
+    print(f"[INFO] Extracted {len(packets)} memory packets")
+
     return packets
 
 
@@ -61,7 +96,7 @@ def save_memory_packets(packets):
 
     if output_file.exists():
 
-        with open(output_file, "r") as f:
+        with open(output_file, "r", encoding="utf-8") as f:
             existing = json.load(f)
 
     else:
@@ -69,7 +104,7 @@ def save_memory_packets(packets):
 
     existing.extend(packets)
 
-    with open(output_file, "w") as f:
+    with open(output_file, "w", encoding="utf-8") as f:
         json.dump(existing, f, indent=2)
 
     print(f"[SUCCESS] Stored {len(packets)} memory packets")

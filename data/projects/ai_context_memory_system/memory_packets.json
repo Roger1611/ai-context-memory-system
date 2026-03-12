@@ -40,5 +40,320 @@
     "type": "system architecture",
     "content": "The next module will make the system actually useful: Semantic Memory Retrieval enables generating context prompts that work in any AI assistant.",
     "source_conversation": "conv_5204977e"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "project_goal",
+    "type": "goal",
+    "content": "Build a cross-LLM context memory system that converts AI conversations into durable project memory.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "problem_statement",
+    "type": "issue",
+    "content": "AI systems need to store and reuse knowledge from conversations across different LLM platforms without dependency on specific APIs or models.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "architecture",
+    "type": "system_design",
+    "content": "The system uses Playwright for conversation ingestion, OpenRouter as the LLM gateway, and stores structured memory packets in a local database/file system.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "repository_structure",
+    "type": "structure",
+    "content": "GitHub-ready folder structure with explicit package definitions using __init__.py files.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "completed_components",
+    "type": "component",
+    "content": "Conversation ingestion module implemented.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "current_progress",
+    "type": "project_state",
+    "content": "The conversation ingestion module is working and the next step is to implement the memory extraction engine.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "important_decisions",
+    "type": "decision",
+    "content": "Using OpenRouter for multi-model access, but storing structured memory locally. The system will be LLM-agnostic with a model adapter layer.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "algorithms",
+    "type": "algorithm",
+    "content": "Designing the extraction prompt architecture to produce structured durable knowledge from conversations.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "datasets",
+    "type": "dataset",
+    "content": "No specific datasets mentioned, but raw conversation text will be used as input.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "experiments",
+    "type": "experiment",
+    "content": "Testing the extraction engine with different LLM models to ensure reliability and accuracy.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "code_modules",
+    "type": "module",
+    "content": "Implementing ingestion, memory extraction, and retrieval modules using Ollama + Llama 3.18B model.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "open_questions",
+    "type": "question",
+    "content": "How to design the extraction prompt architecture for reliable knowledge extraction from small local models like Llama 3Q4.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "step",
+    "content": "Implementing the memory extraction engine and adding a retrieval layer to enable cross-assistant context portability.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "limitations",
+    "type": "limitation",
+    "content": "The system requires careful prompt design to avoid noisy or unreliable knowledge extraction from small models.",
+    "source_conversation": "abc01342"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "project_goal",
+    "type": "long_term_objective",
+    "content": "Deepen AI system understanding, build several AI systems, and turn one solution into a product.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "problem_statement",
+    "type": "current_issue",
+    "content": "Many strong ML engineers struggle to truly understand deep learning despite using it daily. This issue is common and explains the 'copy-paste code' feeling.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "problem_statement",
+    "type": "industry_change",
+    "content": "The software development landscape has changed, with systems like OpenAI models reducing the marginal cost of writing code, but learning coding deeply remains valuable for engineering systems.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "problem_statement",
+    "type": "technical_founder_path",
+    "content": "Technical founders often start with strong engineering understanding and then gradually move into leadership roles. They can derive systems from first principles, understand why architectures work, modify them without tutorials, design new experiments, build infrastructure, identify unsolved problems, and more.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "problem_statement",
+    "type": "company_startup_path",
+    "content": "Companies typically begin with a technically differentiated capability that solves a concrete problem. Examples include DeepMind, OpenAI, NVIDIA, and Stripe.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "project_goal",
+    "type": "short_term_objective",
+    "content": "Deepen understanding of deep learning systems, build several AI systems, observe recurring developer problems, and turn one solution into a product.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "problem_statement",
+    "type": "learning_path",
+    "content": "The path to becoming a technical founder involves courses like MIT 6.S191 Introduction to Deep Learning for conceptual grounding, followed by building systems through experiments and prototypes.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "project_goal",
+    "type": "research_focus",
+    "content": "Research areas include embedding compactness, representation learning, ML systems engineering, developer tooling for AI, and more.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "problem_statement",
+    "type": "learning_resource",
+    "content": "MIT 6.S191 Introduction to Deep Learning lectures are a good resource for strengthening conceptual understanding of deep learning, especially when combined with experiments and model implementation.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "completed_components",
+    "type": "research_experiments",
+    "content": "EEG representation learning research, CNN emotion detection system, cross-LLM context memory architecture.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "current_progress",
+    "type": "learning_path",
+    "content": "Watching MIT deep learning lectures and actively reconstructing minimal versions of the ideas to strengthen model architecture intuition, training mechanics, and representation thinking.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "important_decisions",
+    "type": "technical_founder_skills",
+    "content": "Deriving systems from first principles, understanding why architectures work, modifying them without tutorials, designing new experiments, building infrastructure, identifying unsolved problems, and more.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "algorithms",
+    "type": "perceptron_example",
+    "content": "Explained the concept of a perceptron, decision boundary, linear score computation, activation functions, and their role in creating complex nonlinear decision boundaries.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "datasets",
+    "type": "example_datasets",
+    "content": "XOR problem used as an example to demonstrate why hidden-layer activations are necessary for creating complex nonlinear decision boundaries.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "experiments",
+    "type": "perceptron_experiments",
+    "content": "Performed experiments with perceptrons, observing how training and accuracy change, and understanding the role of activation functions in decision-making processes.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "code_modules",
+    "type": "implementation_examples",
+    "content": "Implemented minimal versions of ideas from lectures to observe behavior changes and strengthen intuition about model architecture and training mechanics.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "open_questions",
+    "type": "technical_founder_path",
+    "content": "How to balance depth with practical progress, how to identify recurring developer problems, and how to turn one solution into a product.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "learning_plan",
+    "content": "Continue watching MIT deep learning lectures, actively reconstructing minimal versions of the ideas, modifying models to observe behavior changes, and building several AI systems through experiments and prototypes.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "limitations",
+    "type": "industry_requirements",
+    "content": "While MIT 6.S191 Introduction to Deep Learning can improve theoretical understanding, it should be treated as supplementary conceptual training rather than the primary learning method for industry-ready ML engineering.",
+    "source_conversation": "e11e33c2"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "explanation",
+    "content": "The decision boundary in a single-layer perceptron with an activation function (like sigmoid) is still linear because the activation function is applied after computing the linear score. The key point is that the nonlinearity does not affect the initial linear combination of inputs. Let's break it down step-by-step.",
+    "source_conversation": "9525e7e7"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "equation",
+    "content": "1. **Linear Score Calculation**: \n   - The model computes a weighted sum of the input features: \n     \\[ z = Wx + b \\]\n2. **Activation Function Application**: \n   - This linear score is then passed through an activation function, such as sigmoid: \n     \\[ y = g(z) \\]",
+    "source_conversation": "9525e7e7"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "mathematical_explanation",
+    "content": "The decision boundary occurs where the output crosses a threshold. For a binary classification problem with sigmoid activation, this happens when: \n   - If using a step function for binary classification: \n     \\[ g(z) = 1 \\text{ if } z > 0, \\quad g(z) = 0 \\text{ otherwise} \\]\n   - For the sigmoid function: \n     \\[ y = \\frac{1}{1 + e^{-z}} \\]\n     The decision boundary is where: \n     \\[ y = 0.5 \\Rightarrow z = 0 \\]",
+    "source_conversation": "9525e7e7"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "geometric_explanation",
+    "content": "In a 2D example, consider the following inputs and weights:\n   - Input vector: \n     \\[ x = [x_1, x_2] \\]\n   - Weight matrix: \n     \\[ W = \\begin{bmatrix} w_{11} & w_{12} \\\\ w_{21} & w_{22} \\end{bmatrix} \\]\n   - Bias vector: \n     \\[ b = [b_1, b_2] \\]\n   - Linear score calculation: \n     \\[ z = Wx + b = w_{11}x_1 + w_{12}x_2 + b_1 \\text{ and } z = w_{21}x_1 + w_{22}x_2 + b_2 \\]\n   - Decision boundary in 2D: \n     The decision boundary is a straight line where the linear score equals zero. For example, if we have only one input feature (simplified for visualization): \n     \\[ z = w_1 x_1 + b = 0 \\]",
+    "source_conversation": "9525e7e7"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "intuitive_example",
+    "content": "Consider the XOR problem, which cannot be solved by a single-layer perceptron. The decision boundary needs to be nonlinear.\n   - For the XOR problem: \n     \\[ x_1 = [0, 0], [0, 1], [1, 0], [1, 1] \\]\n     \\[ y = [0, 1, 1, 0] \\]\n   - A single-layer perceptron with a linear decision boundary cannot separate these points. However, adding hidden layers allows for nonlinear transformations: \n     - Hidden layer activation: \n       \\[ h_1 = g(z_1) = g(w_{11}x_1 + b_1), \\quad h_2 = g(z_2) = g(w_{21}x_1 + b_2) \\]\n     - Final output layer: \n       \\[ y = g(Wh + b) = g(w_{31}h_1 + w_{32}h_2 + b) \\]",
+    "source_conversation": "9525e7e7"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "diagram_prompt",
+    "content": "To further illustrate, please provide a simple 2D diagram that shows the linear decision boundary of a single-layer perceptron and how adding hidden layers with nonlinear activations allows for complex boundaries.",
+    "source_conversation": "9525e7e7"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "explanation",
+    "content": "The decision boundary in a single-layer perceptron with an activation function is still linear because the activation function is applied after computing the linear score. The key point is that the nonlinearity does not affect the initial linear combination of inputs. Let's break it down step-by-step.",
+    "source_conversation": "e37438b9"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "equation",
+    "content": "1. **Linear Score Calculation**: \n   - The model computes a linear score using the input features and weights: \n     \\[ z = Wx + b \\]\n2. **Activation Function Application**: \n   - A nonlinear activation function is applied to this score: \n     \\[ y = g(z) \\]",
+    "source_conversation": "e37438b9"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "mathematical_explanation",
+    "content": "The decision boundary occurs where the output crosses a threshold. For a sigmoid activation, the decision boundary is given by: \n   - If using a step function for binary classification: \n     \\[ g(z) = 1 \\text{ if } z > 0, \\quad g(z) = 0 \\text{ otherwise} \\]\n   - If using a sigmoid activation: \n     \\[ y = \\sigma(z) \\text{ where } \\sigma(z) = \\frac{1}{1 + e^{-z}} \\]\n     The decision boundary is at: \n     \\[ z = 0 \\]",
+    "source_conversation": "e37438b9"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "geometric_explanation",
+    "content": "In a 2D example, consider the following inputs and weights:\n   - Input vector: \\( x = [1, 2] \\)\n   - Weights: \\( W = [[0.5, -0.5], [-0.5, 0.5]] \\)\n   - Bias: \\( b = [0, 0] \\)\n\nThe linear score for the first hidden unit is:\n   - \\[ z_1 = W_{11}x_1 + W_{12}x_2 + b_1 = 0.5 \times 1 - 0.5 \times 2 + 0 = -0.5 \\]\n\nThe linear score for the second hidden unit is:\n   - \\[ z_2 = W_{21}x_1 + W_{22}x_2 + b_2 = -0.5 \times 1 + 0.5 \times 2 + 0 = 0.5 \\]\n\nThe decision boundary is where the linear score equals zero, which forms a line in this 2D space.",
+    "source_conversation": "e37438b9"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "intuitive_example",
+    "content": "Consider the XOR problem:\n   - Input: \\( x_1 = [0, 0], [0, 1], [1, 0], [1, 1] \\)\n   - Desired output: \\( y = [0, 1, 1, 0] \\)\n\nA single-layer perceptron cannot solve this problem because it can only learn linear decision boundaries. However, by adding a hidden layer with nonlinear activations, the network can create complex curved boundaries.",
+    "source_conversation": "e37438b9"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "next_steps",
+    "type": "diagram_prompt",
+    "content": "To further illustrate, please provide a simple 2D diagram that shows how a single-layer perceptron and a two-layer neural network with hidden activations handle the XOR problem. This should make the concept clear.",
+    "source_conversation": "e37438b9"
   }
 ]

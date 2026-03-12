@@ -28,4 +28,4 @@ LLM_PROVIDER = "ollama"
 
 OLLAMA_BASE_URL = "http://localhost:11434"
 
-OLLAMA_MODEL = "llama3.1:8b-instruct-q4_K_M"
+OLLAMA_MODEL = "qwen2.5:7b-instruct"
