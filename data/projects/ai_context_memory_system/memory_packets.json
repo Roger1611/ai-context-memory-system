@@ -1,359 +1,572 @@
 [
   {
-    "project": "default_project",
-    "topic": "LLM Memory Extraction Engine",
-    "type": "design decision",
-    "content": "The extraction stage will include durable knowledge filtering, memory packet schema, automatic topic clustering, and structured outputs from Llama.",
-    "source_conversation": "conv_5204977e"
-  },
-  {
-    "project": "default_project",
-    "topic": "Memory Packet Schema",
-    "type": "schema enforcement",
-    "content": "The prompt must enforce a strict schema like 'conversation_id': ..., 'text': ..., 'entities': ... to produce structured durable knowledge.",
-    "source_conversation": "conv_5204977e"
-  },
-  {
-    "project": "default_project",
-    "topic": "Ollama and Llama Model Configuration",
-    "type": "configuration",
-    "content": "The system will use local Ollama + Llama 3.1 model as the default LLM backend, with a modular adapter layer allowing integration with other LLM providers.",
-    "source_conversation": "conv_5204977e"
-  },
-  {
-    "project": "default_project",
-    "topic": "Memory Extraction Engine Architecture",
-    "type": "system architecture",
-    "content": "Pipeline: Conversation ingestion -> Memory extraction engine -> LLM call -> Parse structured output -> Store memory packets.",
-    "source_conversation": "conv_5204977e"
-  },
-  {
-    "project": "default_project",
-    "topic": "JSON-safe Extraction Fix for Llama Model",
-    "type": "fix",
-    "content": "Small 8B models often produce slightly broken JSON, and fixing this now will save debugging later.",
-    "source_conversation": "conv_5204977e"
-  },
-  {
-    "project": "default_project",
-    "topic": "Semantic Memory Retrieval",
-    "type": "system architecture",
-    "content": "The next module will make the system actually useful: Semantic Memory Retrieval enables generating context prompts that work in any AI assistant.",
-    "source_conversation": "conv_5204977e"
-  },
-  {
     "project": "ai_context_memory_system",
-    "topic": "project_goal",
-    "type": "goal",
-    "content": "Build a cross-LLM context memory system that converts AI conversations into durable project memory.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "problem_statement",
-    "type": "issue",
-    "content": "AI systems need to store and reuse knowledge from conversations across different LLM platforms without dependency on specific APIs or models.",
-    "source_conversation": "abc01342"
+    "topic": "architecture",
+    "type": "conceptual_project_knowledge",
+    "content": "The project involves building a web application with a backend and frontend.",
+    "source_conversation": "ac82724e",
+    "source": "context_extraction"
   },
   {
     "project": "ai_context_memory_system",
     "topic": "architecture",
-    "type": "system_design",
-    "content": "The system uses Playwright for conversation ingestion, OpenRouter as the LLM gateway, and stores structured memory packets in a local database/file system.",
-    "source_conversation": "abc01342"
+    "type": "folder_structure",
+    "content": "src\n- app\n  - controllers\n  - models\n  - routes\n- config\n- public\n- tests",
+    "source_conversation": "ac82724e",
+    "source": "context_extraction"
   },
   {
     "project": "ai_context_memory_system",
+    "topic": "architecture",
+    "type": "file_role",
+    "content": "app/controllers/user_controller.py handles user-related operations.",
+    "source_conversation": "ac82724e",
+    "source": "context_extraction"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "architecture",
+    "type": "setup_step",
+    "content": "Install dependencies using pip install -r requirements.txt",
+    "source_conversation": "ac82724e",
+    "source": "context_extraction"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "architecture",
+    "type": "command",
+    "content": "python manage.py runserver",
+    "source_conversation": "ac82724e",
+    "source": "context_extraction"
+  },
+  {
+    "project": "ai_context_memory_system",
+    "topic": "architecture",
+    "type": "entrypoint",
+    "content": "The main entry point is defined in app/main.py",
+    "source_conversation": "ac82724e",
+    "source": "context_extraction"
+  },
+  {
+    "topic": "architecture",
+    "type": "folder_structure",
+    "content": "src\n\u251c\u2500\u2500 cli\n\u2502   \u2514\u2500\u2500 session.py\n\u251c\u2500\u2500 parser\n\u2502   \u251c\u2500\u2500 __init__.py\n\u2502   \u251c\u2500\u2500 chat_parser.py\n\u2502   \u2514\u2500\u2500 schema.py\n\u251c\u2500\u2500 llm_backend\n\u2502   \u2514\u2500\u2500 qwen2_5_7b_instruct.py\n\u251c\u2500\u2500 vector_search\n\u2502   \u251c\u2500\u2500 faiss_index.py\n\u2502   \u2514\u2500\u2500 embedding_generator.py\n\u2514\u2500\u2500 memory_packet\n    \u2514\u2500\u2500 packet.py",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "architecture",
+    "type": "file_role",
+    "content": "session.py: Manages the creation and management of sessions for conversation ingestion.\nchat_parser.py: Responsible for parsing user messages, assistant responses, and maintaining conversation order.\nschema.py: Defines the schema for extracting structured data from conversations.\nqwen2_5_7b_instruct.py: Implements the LLM backend using Qwen 2.5-7B-Instruct model.\nfaiss_index.py: Manages the FAISS index for vector search and semantic recall.\nembedding_generator.py: Generates embeddings locally to be stored in the FAISS index.\npacket.py: Represents a memory packet, which is a structured data unit containing extracted knowledge units.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "architecture",
+    "type": "dependency",
+    "content": "pip install playwright\npip install faiss-cpu\npip install numpy\npip install torch",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "architecture",
+    "type": "setup_step",
+    "content": "python -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "architecture",
+    "type": "workflow",
+    "content": "ChatGPT share link ingestion -> Conversation parsing -> LLM knowledge extraction -> Memory packet generation -> FAISS indexing -> Context snapshot generation",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "architecture",
+    "type": "entrypoint",
+    "content": "python src/cli/session.py",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "architecture",
+    "type": "command",
+    "content": "python -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt\npython src/cli/session.py --help",
+    "source": "dev_extraction"
+  },
+  {
     "topic": "repository_structure",
-    "type": "structure",
-    "content": "GitHub-ready folder structure with explicit package definitions using __init__.py files.",
-    "source_conversation": "abc01342"
+    "type": "folder_structure",
+    "content": "ingestion \u2192 extraction \u2192 packets \u2192 embeddings \u2192 retrieval \u2192 context_snapshot",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "completed_components",
-    "type": "component",
-    "content": "Conversation ingestion module implemented.",
-    "source_conversation": "abc01342"
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "Current packets do not track time or versioning. Example packet: { 'id': 'unique_id', 'content': 'knowledge_content', 'timestamp': 'current_timestamp' }",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "No specific dependencies mentioned in the conversation.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "setup_step",
+    "content": "No setup steps explicitly mentioned, but it implies setting up a system for memory extraction and retrieval.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "Current workflow: Ingestion \u2192 Extraction \u2192 Packets \u2192 Embeddings \u2192 Retrieval \u2192 Context Snapshot\nUpgraded workflow: Ingestion \u2192 Extraction \u2192 Duplicate Detection & Merging \u2192 Packets with Time Tracking \u2192 Embeddings \u2192 Versioned Project Memory \u2192 Cross-LLM Context Injection",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "entrypoint",
+    "content": "No specific entrypoints mentioned, but it implies starting from ingestion and moving through the pipeline.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "No specific commands mentioned in the conversation.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "project_goal",
+    "type": "workflow",
+    "content": "Create a persistent memory layer for AI tools that automatically attaches context to new queries and transfers project knowledge.",
+    "source": "dev_extraction"
+  },
+  {
     "topic": "current_progress",
-    "type": "project_state",
-    "content": "The conversation ingestion module is working and the next step is to implement the memory extraction engine.",
-    "source_conversation": "abc01342"
+    "type": "folder_structure",
+    "content": "The current system extracts durable knowledge from conversations but does not yet transfer the full developer environment (repo structure, code relationships, dependencies).",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "important_decisions",
-    "type": "decision",
-    "content": "Using OpenRouter for multi-model access, but storing structured memory locally. The system will be LLM-agnostic with a model adapter layer.",
-    "source_conversation": "abc01342"
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "Developers need to understand the repository structure and file responsibilities. The system should automatically analyze the repo and produce structured knowledge.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "algorithms",
-    "type": "algorithm",
-    "content": "Designing the extraction prompt architecture to produce structured durable knowledge from conversations.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "datasets",
-    "type": "dataset",
-    "content": "No specific datasets mentioned, but raw conversation text will be used as input.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "experiments",
-    "type": "experiment",
-    "content": "Testing the extraction engine with different LLM models to ensure reliability and accuracy.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "code_modules",
-    "type": "module",
-    "content": "Implementing ingestion, memory extraction, and retrieval modules using Ollama + Llama 3.18B model.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "open_questions",
-    "type": "question",
-    "content": "How to design the extraction prompt architecture for reliable knowledge extraction from small local models like Llama 3Q4.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "step",
-    "content": "Implementing the memory extraction engine and adding a retrieval layer to enable cross-assistant context portability.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "limitations",
-    "type": "limitation",
-    "content": "The system requires careful prompt design to avoid noisy or unreliable knowledge extraction from small models.",
-    "source_conversation": "abc01342"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "project_goal",
-    "type": "long_term_objective",
-    "content": "Deepen AI system understanding, build several AI systems, and turn one solution into a product.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "problem_statement",
-    "type": "current_issue",
-    "content": "Many strong ML engineers struggle to truly understand deep learning despite using it daily. This issue is common and explains the 'copy-paste code' feeling.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "problem_statement",
-    "type": "industry_change",
-    "content": "The software development landscape has changed, with systems like OpenAI models reducing the marginal cost of writing code, but learning coding deeply remains valuable for engineering systems.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "problem_statement",
-    "type": "technical_founder_path",
-    "content": "Technical founders often start with strong engineering understanding and then gradually move into leadership roles. They can derive systems from first principles, understand why architectures work, modify them without tutorials, design new experiments, build infrastructure, identify unsolved problems, and more.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "problem_statement",
-    "type": "company_startup_path",
-    "content": "Companies typically begin with a technically differentiated capability that solves a concrete problem. Examples include DeepMind, OpenAI, NVIDIA, and Stripe.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "project_goal",
-    "type": "short_term_objective",
-    "content": "Deepen understanding of deep learning systems, build several AI systems, observe recurring developer problems, and turn one solution into a product.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "problem_statement",
-    "type": "learning_path",
-    "content": "The path to becoming a technical founder involves courses like MIT 6.S191 Introduction to Deep Learning for conceptual grounding, followed by building systems through experiments and prototypes.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "project_goal",
-    "type": "research_focus",
-    "content": "Research areas include embedding compactness, representation learning, ML systems engineering, developer tooling for AI, and more.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "problem_statement",
-    "type": "learning_resource",
-    "content": "MIT 6.S191 Introduction to Deep Learning lectures are a good resource for strengthening conceptual understanding of deep learning, especially when combined with experiments and model implementation.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "completed_components",
-    "type": "research_experiments",
-    "content": "EEG representation learning research, CNN emotion detection system, cross-LLM context memory architecture.",
-    "source_conversation": "e11e33c2"
-  },
-  {
-    "project": "ai_context_memory_system",
     "topic": "current_progress",
-    "type": "learning_path",
-    "content": "Watching MIT deep learning lectures and actively reconstructing minimal versions of the ideas to strengthen model architecture intuition, training mechanics, and representation thinking.",
-    "source_conversation": "e11e33c2"
+    "type": "file_role",
+    "content": "Example information needed includes understanding what each file does, module purpose, and code responsibilities. This is essential for someone else to run the project.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "important_decisions",
-    "type": "technical_founder_skills",
-    "content": "Deriving systems from first principles, understanding why architectures work, modifying them without tutorials, designing new experiments, building infrastructure, identifying unsolved problems, and more.",
-    "source_conversation": "e11e33c2"
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "The system should map dependencies such as libraries, tools, frameworks, and models that are used in the project.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "algorithms",
-    "type": "perceptron_example",
-    "content": "Explained the concept of a perceptron, decision boundary, linear score computation, activation functions, and their role in creating complex nonlinear decision boundaries.",
-    "source_conversation": "e11e33c2"
+    "topic": "current_progress",
+    "type": "setup_step",
+    "content": "Add a repository ingestion module to automatically analyze the repo and produce structured knowledge. This will help another developer understand the repo instantly.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "datasets",
-    "type": "example_datasets",
-    "content": "XOR problem used as an example to demonstrate why hidden-layer activations are necessary for creating complex nonlinear decision boundaries.",
-    "source_conversation": "e11e33c2"
+    "topic": "repository_structure",
+    "type": "entrypoint",
+    "content": "The system should have entrypoints and main pipeline scripts that define how the project is executed and its workflow.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "experiments",
-    "type": "perceptron_experiments",
-    "content": "Performed experiments with perceptrons, observing how training and accuracy change, and understanding the role of activation functions in decision-making processes.",
-    "source_conversation": "e11e33c2"
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "Folder structures are not explicitly mentioned in the conversation, but based on typical project setups, common folder structures might include:\n- src/\n  - app/\n  - config/\n  - db/\n  - tests/",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "code_modules",
-    "type": "implementation_examples",
-    "content": "Implemented minimal versions of ideas from lectures to observe behavior changes and strengthen intuition about model architecture and training mechanics.",
-    "source_conversation": "e11e33c2"
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "File responsibilities are not explicitly mentioned in the conversation, but based on typical project setups, common file roles might include:\n- extractor.py: handles schema guided memory extraction\n- install_requirements.sh: script to install dependencies",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "open_questions",
-    "type": "technical_founder_path",
-    "content": "How to balance depth with practical progress, how to identify recurring developer problems, and how to turn one solution into a product.",
-    "source_conversation": "e11e33c2"
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "Dependencies are not explicitly mentioned in the conversation, but based on typical project setups, common dependencies might include:\n- FAISS\n- Ollama",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "learning_plan",
-    "content": "Continue watching MIT deep learning lectures, actively reconstructing minimal versions of the ideas, modifying models to observe behavior changes, and building several AI systems through experiments and prototypes.",
-    "source_conversation": "e11e33c2"
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "Setup commands: install_requirements.sh\nRun commands: Not explicitly mentioned\nTest commands: Not explicitly mentioned",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "limitations",
-    "type": "industry_requirements",
-    "content": "While MIT 6.S191 Introduction to Deep Learning can improve theoretical understanding, it should be treated as supplementary conceptual training rather than the primary learning method for industry-ready ML engineering.",
-    "source_conversation": "e11e33c2"
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "Execution flow is not explicitly mentioned in the conversation, but based on typical project setups, common workflow might include:\n- Run setup script (install_requirements.sh)\n- Start pipeline\n- Handle schema guided memory extraction",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "explanation",
-    "content": "The decision boundary in a single-layer perceptron with an activation function (like sigmoid) is still linear because the activation function is applied after computing the linear score. The key point is that the nonlinearity does not affect the initial linear combination of inputs. Let's break it down step-by-step.",
-    "source_conversation": "9525e7e7"
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "src/\n  dev_extractor.py\n  context_builder.py\n  memory_sync.py\nprompts/\n  dev_memory_prompt.txt",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "equation",
-    "content": "1. **Linear Score Calculation**: \n   - The model computes a weighted sum of the input features: \n     \\[ z = Wx + b \\]\n2. **Activation Function Application**: \n   - This linear score is then passed through an activation function, such as sigmoid: \n     \\[ y = g(z) \\]",
-    "source_conversation": "9525e7e7"
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "dev_extractor.py - Creates a module that uses the existing Ollama backend.\nmemory_sync.py - Ingestion script where the developer context bundle is built.\ncontext_builder.py - Builds a developer context bundle when another developer queries the system.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "mathematical_explanation",
-    "content": "The decision boundary occurs where the output crosses a threshold. For a binary classification problem with sigmoid activation, this happens when: \n   - If using a step function for binary classification: \n     \\[ g(z) = 1 \\text{ if } z > 0, \\quad g(z) = 0 \\text{ otherwise} \\]\n   - For the sigmoid function: \n     \\[ y = \\frac{1}{1 + e^{-z}} \\]\n     The decision boundary is where: \n     \\[ y = 0.5 \\Rightarrow z = 0 \\]",
-    "source_conversation": "9525e7e7"
+    "topic": "repository_structure",
+    "type": "package_layout",
+    "content": "The repository structure includes src/ for source code, prompts/ for prompts used in extraction, and dependencies are managed through Python's standard package management.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "geometric_explanation",
-    "content": "In a 2D example, consider the following inputs and weights:\n   - Input vector: \n     \\[ x = [x_1, x_2] \\]\n   - Weight matrix: \n     \\[ W = \\begin{bmatrix} w_{11} & w_{12} \\\\ w_{21} & w_{22} \\end{bmatrix} \\]\n   - Bias vector: \n     \\[ b = [b_1, b_2] \\]\n   - Linear score calculation: \n     \\[ z = Wx + b = w_{11}x_1 + w_{12}x_2 + b_1 \\text{ and } z = w_{21}x_1 + w_{22}x_2 + b_2 \\]\n   - Decision boundary in 2D: \n     The decision boundary is a straight line where the linear score equals zero. For example, if we have only one input feature (simplified for visualization): \n     \\[ z = w_1 x_1 + b = 0 \\]",
-    "source_conversation": "9525e7e7"
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "Ollama",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "intuitive_example",
-    "content": "Consider the XOR problem, which cannot be solved by a single-layer perceptron. The decision boundary needs to be nonlinear.\n   - For the XOR problem: \n     \\[ x_1 = [0, 0], [0, 1], [1, 0], [1, 1] \\]\n     \\[ y = [0, 1, 1, 0] \\]\n   - A single-layer perceptron with a linear decision boundary cannot separate these points. However, adding hidden layers allows for nonlinear transformations: \n     - Hidden layer activation: \n       \\[ h_1 = g(z_1) = g(w_{11}x_1 + b_1), \\quad h_2 = g(z_2) = g(w_{21}x_1 + b_2) \\]\n     - Final output layer: \n       \\[ y = g(Wh + b) = g(w_{31}h_1 + w_{32}h_2 + b) \\]",
-    "source_conversation": "9525e7e7"
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "No specific setup or run commands were mentioned, but the system likely uses standard Python package management tools.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "diagram_prompt",
-    "content": "To further illustrate, please provide a simple 2D diagram that shows the linear decision boundary of a single-layer perceptron and how adding hidden layers with nonlinear activations allows for complex boundaries.",
-    "source_conversation": "9525e7e7"
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "The workflow involves extending the packet schema and modifying the LLM extraction prompt to capture developer artifacts. The memory extraction will output more expressive packet types, becoming a general project knowledge extractor.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "explanation",
-    "content": "The decision boundary in a single-layer perceptron with an activation function is still linear because the activation function is applied after computing the linear score. The key point is that the nonlinearity does not affect the initial linear combination of inputs. Let's break it down step-by-step.",
-    "source_conversation": "e37438b9"
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "Below is the precise set of files to modify and what to add.\n\nFile to update\n- If you do not currently have a central schema file, create one. The goal is to expand the allowed packet types.\n- (or whatever file you currently pass to Ollama)\nReplace the instruction section with this richer version.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "equation",
-    "content": "1. **Linear Score Calculation**: \n   - The model computes a linear score using the input features and weights: \n     \\[ z = Wx + b \\]\n2. **Activation Function Application**: \n   - A nonlinear activation function is applied to this score: \n     \\[ y = g(z) \\]",
-    "source_conversation": "e37438b9"
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "No other changes required in this file.\nor whatever file you currently pass to Ollama\nReplace the instruction section with this richer version.\nThis is the most important modification.\nIt enables the extractor to capture:\n- folder structures\n- file explanations\n- developer setup instructions",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "mathematical_explanation",
-    "content": "The decision boundary occurs where the output crosses a threshold. For a sigmoid activation, the decision boundary is given by: \n   - If using a step function for binary classification: \n     \\[ g(z) = 1 \\text{ if } z > 0, \\quad g(z) = 0 \\text{ otherwise} \\]\n   - If using a sigmoid activation: \n     \\[ y = \\sigma(z) \\text{ where } \\sigma(z) = \\frac{1}{1 + e^{-z}} \\]\n     The decision boundary is at: \n     \\[ z = 0 \\]",
-    "source_conversation": "e37438b9"
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "Your context builder currently probably prints a generic summary. It should now group packets by type so developers can understand the project quickly.\nReplace your current builder with something like this.",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "geometric_explanation",
-    "content": "In a 2D example, consider the following inputs and weights:\n   - Input vector: \\( x = [1, 2] \\)\n   - Weights: \\( W = [[0.5, -0.5], [-0.5, 0.5]] \\)\n   - Bias: \\( b = [0, 0] \\)\n\nThe linear score for the first hidden unit is:\n   - \\[ z_1 = W_{11}x_1 + W_{12}x_2 + b_1 = 0.5 \times 1 - 0.5 \times 2 + 0 = -0.5 \\]\n\nThe linear score for the second hidden unit is:\n   - \\[ z_2 = W_{21}x_1 + W_{22}x_2 + b_2 = -0.5 \times 1 + 0.5 \times 2 + 0 = 0.5 \\]\n\nThe decision boundary is where the linear score equals zero, which forms a line in this 2D space.",
-    "source_conversation": "e37438b9"
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "Below is the reasoning and recommended architecture.\nA unified extractor prompt has to optimize for two different tasks:\n- Conceptual knowledge\n- architecture\n- research insights\n- Developer artifacts\n- folder structures\n- file responsibilities\n- setup instructions\n- entrypoints\n- dependencies",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "intuitive_example",
-    "content": "Consider the XOR problem:\n   - Input: \\( x_1 = [0, 0], [0, 1], [1, 0], [1, 1] \\)\n   - Desired output: \\( y = [0, 1, 1, 0] \\)\n\nA single-layer perceptron cannot solve this problem because it can only learn linear decision boundaries. However, by adding a hidden layer with nonlinear activations, the network can create complex curved boundaries.",
-    "source_conversation": "e37438b9"
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "Example problem:\nConversation text:\nA generic extractor might output:\nBut a developer needs:",
+    "source": "dev_extraction"
   },
   {
-    "project": "ai_context_memory_system",
-    "topic": "next_steps",
-    "type": "diagram_prompt",
-    "content": "To further illustrate, please provide a simple 2D diagram that shows how a single-layer perceptron and a two-layer neural network with hidden activations handle the XOR problem. This should make the concept clear.",
-    "source_conversation": "e37438b9"
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "Below is the reasoning and recommended architecture.\n- Usetwo extraction passes.\nBoth outputs are stored in the same packet store.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "You can add stricter rules like:",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "memory_sync.py",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "memory_sync.py: Contains the main pipeline scripts for running both context extraction and developer extraction.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "FAISS",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "Modify where packets are stored: Example addition - For context packets, add a flag to allow filtering later.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "memory_sync.py: Runs both context extraction and developer extraction, then merges the outputs before storing them together.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "entrypoint",
+    "content": "memory_sync.py: The entry point for running the main pipeline scripts.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "folders",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "files",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "package layout",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "what each file does, module purpose, code responsibilities",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "entrypoints, main pipeline scripts, system workflow",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "libraries, tools, frameworks, models",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "setup_step",
+    "content": "setup commands",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "run commands, test commands",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "root\n\u251c\u2500\u2500 memory_sync.py\n\u2514\u2500\u2500 utils\n    \u251c\u2500\u2500 chunking_util.py\n    \u2514\u2500\u2500 deduplication_util.py",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "memory_sync.py: Handles the extraction and saving of developer packets, now includes calls to chunking and duplicate removal utilities.\nutils/chunking_util.py: Utility file for splitting long conversations into smaller pieces before LLM extraction.\nutils/deduplication_util.py: Utility file for removing repeated packets before saving.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "No new dependencies were added. Existing dependencies remain unchanged.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "setup_step",
+    "content": "To set up the system, ensure that memory_sync.py includes imports for chunking_util.py and deduplication_util.py.\nRun the following commands to generate a project context snapshot:\npython -m your_module.snapshot_generator",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "The system workflow involves running memory_sync.py, which now includes calls to chunking and duplicate removal utilities. The pipeline remains stable with no other changes required.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "entrypoint",
+    "content": "memory_sync.py is the main entrypoint for the system.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "To run the modified pipeline, use:\npython memory_sync.py\nTo generate a project context snapshot, use:\npython -m your_module.snapshot_generator",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "The repository structure is not explicitly detailed in this conversation, but it can be inferred that there are multiple files and folders related to different aspects of the project.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "Snapshot script: The file responsible for generating snapshots. It now includes saving output to a .txt file.\n\nordered_topics: A list that defines which topics are included in the snapshot, such as 'folder_structure', 'file_role', and others.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "No explicit mention of dependencies is made in this conversation. However, it can be inferred that there are dependencies related to the project's functionality, such as libraries, tools, or frameworks used for ingestion, extraction, and FAISS indexing.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "setup_step",
+    "content": "Modify the snapshot script by appending developer topics to ordered_topics.\n\nRun commands: Modify the snapshot script with only necessary modifications.\n\nTest commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "The workflow involves generating snapshots of the project. The output is saved to a .txt file which includes both conceptual project knowledge and developer onboarding information.\n\nEntry points: The script that generates the snapshot.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "Modify the snapshot script by appending developer topics to ordered_topics.\n\nRun commands: Modify the snapshot script with only necessary modifications.\n\nTest commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "project_goal",
+    "type": "folder_structure",
+    "content": "dev_schema.py",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "project_goal",
+    "type": "file_role",
+    "content": "dev_extraction_prompt.py: Contains the developer extraction schema. Should not be duplicated in ollama_client.py.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "project_goal",
+    "type": "dependency",
+    "content": "ollama_client.py: Should only handle LLM API calls and should not contain extraction schemas.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "project_goal",
+    "type": "command",
+    "content": "You can open the saved output file directly in ChatGPT, Claude, or Gemini.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "dev_extraction_prompt.py\nollama_client.py",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "dev_extraction_prompt.py: Contains the LLM prompt for extracting developer knowledge.\nollama_client.py: Contains code that calls Ollama.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "No explicit dependencies mentioned, but it is implied that ollama_client.py interacts with an external service or library.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "setup_step",
+    "content": "Not explicitly stated, but the setup likely involves ensuring the Ollama client can be called properly.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "workflow",
+    "content": "The workflow starts with dev_extraction_prompt.py generating a prompt for extracting developer knowledge and then ollama_client.py processing this request to extract relevant information.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "entrypoint",
+    "content": "dev_extraction_prompt.py: The entry point for the extraction process.\nollama_client.py: A secondary script that processes the prompt and interacts with Ollama.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "Not explicitly stated, but it is implied that there are commands to run dev_extraction_prompt.py and ollama_client.py.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "folder_structure",
+    "content": "project_root_directory",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "file_role",
+    "content": "The program will ask: Press ENTER on an empty line when done.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "Qwen2.5 via Ollama",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "setup_step",
+    "content": "Start Ollama if needed:\nThen confirm the model exists:",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "entrypoint",
+    "content": "From your project root directory: The program will ask: Press ENTER on an empty line when done.",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "Start Ollama if needed:\nThen confirm the model exists:",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "architecture",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "folder structures",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "dependency",
+    "content": "setup steps",
+    "source": "dev_extraction"
+  },
+  {
+    "topic": "repository_structure",
+    "type": "command",
+    "content": "The system extracts: architecture\nfolder structures\nsetup steps",
+    "source": "dev_extraction"
   }
 ]
