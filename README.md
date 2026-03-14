@@ -1,107 +1,140 @@
 # AI Context Memory System
 
-This project explores a simple idea: conversations with AI assistants often contain useful information about a project, but that information is difficult to reuse later.
+This project explores a simple idea: AI chats contain useful knowledge, but that knowledge disappears once the conversation ends.
 
-When switching between tools like ChatGPT, Claude, or Gemini, the same context usually needs to be explained again. Important details such as design decisions, architecture explanations, or constraints get buried inside past chats.
+When working on long projects with AI tools like ChatGPT or Claude, I often found myself repeating the same context again and again — explaining the project structure, previous decisions, or results from earlier experiments.
 
-The goal of this project is to extract useful knowledge from those conversations and make it reusable. Instead of repeating the same explanations, the system stores relevant information and retrieves it when needed.
+The goal of this project is to experiment with a small system that can capture useful information from AI conversations and store it as reusable project memory.
 
+Instead of treating chats as temporary conversations, the system tries to extract durable information such as:
 
-## What the system does
+* project progress
+* architecture decisions
+* repository structure
+* development commands
+* research insights
 
-The system reads AI conversations and extracts information that is likely to remain useful later. Examples include architecture notes, design decisions, and explanations of how parts of the project work.
+That information is stored in structured “memory packets” and indexed so it can be retrieved later when working with another AI system.
 
-This information is stored as structured memory entries. When a user asks a question about the project, the system searches those stored entries and builds a prompt containing the most relevant context.
+The idea is that a project’s context can slowly accumulate over time instead of being lost between chats.
 
-The generated prompt can then be pasted into any AI assistant so that the assistant already understands the project background.
+---
 
+## What the System Does
 
-## Example
+At a high level the system takes an AI conversation and tries to turn it into reusable knowledge.
 
-User question:
+1. A share link to an AI chat is provided.
+2. The conversation is downloaded and parsed.
+3. A local LLM analyzes the text and extracts useful project information.
+4. The extracted knowledge is stored as structured memory packets.
+5. Embeddings are generated so the information can be searched later.
+6. A project snapshot summarizing the current state of the project can be generated.
 
-How does the memory extraction engine work?
+The final snapshot can be pasted into another AI conversation to quickly restore project context.
 
-The system retrieves related memory entries from previous conversations and produces a prompt containing that context. The prompt can then be given to an AI assistant to answer the question with the relevant project knowledge included.
+---
 
+## Example of Stored Memory
 
-## Main components
+Information from conversations is stored as small JSON packets.
 
-Conversation ingestion  
-Imports conversations from AI share links and converts them into structured text data.
+Example:
 
-Memory extraction  
-A local language model is used to identify information that should be kept as project knowledge.
+```id="ex2f7b"
+{
+  "project": "EEG Representation Geometry",
+  "topic": "architecture",
+  "type": "decision",
+  "content": "DeepConvNet was selected as the main backbone for the representation study.",
+  "source_conversation": "bf1b280b.json"
+}
+```
 
-Memory storage  
-Extracted knowledge is stored in a structured format as memory packets.
+Each packet captures a small piece of project knowledge that may be useful later.
 
-Vector index  
-Embeddings are created for each memory packet and stored in a FAISS index for semantic search.
+---
 
-Retrieval  
-User queries are converted into embeddings and matched against stored memory packets.
+## Project Structure
 
-Prompt generation  
-Relevant memory entries are combined into a prompt that can be used with any AI assistant.
+```id="j3fsn9"
+ai-context-memory-system/
 
+memory_sync.py
 
-## Project structure
+src/
+  ingestion/
+  extraction/
+  retrieval/
+  utils/
 
-src/  
-    ingestion  
-    extraction  
-    retrieval  
-    prompt_generation  
-    llm  
-    utils  
+memory/
+  packets/
+  vector_index/
 
-data/  
-    raw_conversations  
-    projects/  
-        ai_context_memory_system/  
-            memory_packets.json  
-            vector_index/  
+examples/
+```
 
-scripts/
+The main pipeline is executed through `memory_sync.py`.
 
+Most of the logic is split across modules inside the `src` directory.
 
-## Technologies used
+---
 
-Python  
-Ollama  
-Llama 3.1 (8B Q4)  
-Sentence Transformers  
-FAISS  
-Playwright
+## Technologies Used
 
+Python
+Playwright (for fetching share links)
+Ollama for local LLM inference
+Qwen2.5-7B-Instruct
+HuggingFace embedding models
+FAISS for vector search
 
-## Running the project
+---
 
-Install dependencies
+## Running the Project
 
+Install dependencies:
+
+```id="8q1lgd"
 pip install -r requirements.txt
+```
 
-Build the vector index
+Run the pipeline:
 
-python -m scripts.build_index
+```id="p9oxk8"
+python memory_sync.py
+```
 
-Test retrieval
+The script will ask for:
 
-python -m scripts.test_retrieval
+* a chat share link
+* the source platform (chatgpt / claude / gemini)
 
-Generate prompts
+After processing the conversation, memory packets and a project snapshot will be generated.
 
-python -m scripts.test_prompt_generation
+---
 
+## Why I Built This
 
-## Possible extensions
+This project started as an experiment while working on several AI-assisted research projects.
 
-Support multiple projects  
-Improve retrieval with topic filtering  
-Add a simple web interface  
-Experiment with different embedding models
+I noticed that useful technical discussions were happening inside chat sessions, but there was no easy way to reuse that information later.
 
+The goal here was not to build a full product, but to explore whether it is possible to create a lightweight memory layer that sits on top of AI tools.
+
+---
+
+## Possible Future Improvements
+
+Some ideas that could be explored further:
+
+* linking memory across multiple projects
+* ranking or filtering important knowledge
+* building a small UI for browsing stored context
+* automatically injecting memory into prompts
+
+---
 
 ## License
 
