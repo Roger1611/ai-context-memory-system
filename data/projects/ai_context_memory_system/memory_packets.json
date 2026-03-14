@@ -1,572 +1,218 @@
 [
   {
-    "project": "ai_context_memory_system",
-    "topic": "architecture",
-    "type": "conceptual_project_knowledge",
-    "content": "The project involves building a web application with a backend and frontend.",
-    "source_conversation": "ac82724e",
+    "project": "ai_context",
+    "topic": "folder_structure",
+    "type": "folder_structure",
+    "content": "EEG_REPRESENTATION_GEOMETRY/\n\u2502\n\u251c\u2500\u2500 .vscode/\n\u251c\u2500\u2500 archive/\n\u251c\u2500\u2500 datasets/\n\u2502\n\u251c\u2500\u2500 notebooks/\n\u2502   \u2502\n\u2502   \u251c\u2500\u2500 01_classical_baselines/\n\u2502   \u2502   \u251c\u2500\u2500 01_physionet_baseline_pipeline.ipynb\n\u2502   \u2502   \u251c\u2500\u2500 02_classical_ml_benchmark.ipynb\n\u2502   \u2502   \u2514\u2500\u2500 03_deep_model_benchmark.ipynb\n\u2502   \u2502\n\u2502   \u251c\u2500\u2500 02_backbone_selection/\n\u2502   \u2502   \u251c\u2500\u2500 04_bnci_data_preprocessing.ipynb\n\u2502   \u2502   \u2514\u2500\u2500 05_bnci_deep_model_benchmark.ipynb\n\u2502   \u2502\n\u2502   \u2514\u2500\u2500 03_representation_study/\n\u2502       \u251c\u2500\u2500 06_deepconvnet_icrr_ablation.ipynb\n\u2502       \u2514\u2500\u2500 07_projection_head_with_icrr.ipynb\n\u2502\n\u251c\u2500\u2500 results/\n\u2502   \u2502\n\u2502   \u251c\u2500\u2500 figures/\n\u2502   \u2502   \u2502\n\u2502   \u2502   \u251c\u2500\u2500 embedding_geometry/\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 Block_Similarity_Matrix.png\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 ESS_Delta_Waterfall.png\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 Global_3D_UMAP.png\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 Global_Distance_KDE.png\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 Global_PCA_Projection.png\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 Global_Similarity_Heatmap.png\n\u2502   \u2502   \u2502   \u2514\u2500\u2500 Tuned_tSNE.png\n\u2502   \u2502   \u2502\n\u2502   \u2502   \u251c\u2500\u2500 model_comparisons/\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 UMAP_Backbone_CE.png\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 UMAP_Backbone_CE_ICRR.png\n\u2502   \u2502   \u2502   \u251c\u2500\u2500 UMAP_Backbone_CE_vs_ICRR.png\n\u2502   \u2502   \u2502   \u2514\u2500\u2500 UMAP_Projection_vs_ICRR.png\n\u2502   \u2502   \u2502\n\u2502   \u2502   \u2514\u2500\u2500 regularization_tradeoff/\n\u2502   \u2502       \u251c\u2500\u2500 Lambda_Tradeoff.png\n\u2502   \u2502       \u251c\u2500\u2500 Lambda_vs_Accuracy.png\n\u2502   \u2502       \u2514\u2500\u2500 Lambda_vs_ESS.png\n\u2502   \u2502\n\u2502   \u2514\u2500\u2500 tables/\n\u2502       \u2502\n\u2502       \u251c\u2500\u2500 backbone_benchmarking/\n\u2502       \u2502   \u251c\u2500\u2500 bnci_deep_models_benchmark.csv\n\u2502       \u2502   \u251c\u2500\u2500 classical_ml_kfold_results.csv\n\u2502       \u2502   \u251c\u2500\u2500 deepconvnet_kfold_results.csv\n\u2502       \u2502   \u251c\u2500\u2500 eegnet_holdout_results.csv\n\u2502       \u2502   \u251c\u2500\u2500 eegnet_kfold_results.csv\n\u2502       \u2502   \u2514\u2500\u2500 shallowconvnet_kfold_results.csv\n\u2502       \u2502\n\u2502       \u251c\u2500\u2500 projection_icrr_ablation/\n\u2502       \u2502   \u251c\u2500\u2500 compactness_summary.json\n\u2502       \u2502   \u251c\u2500\u2500 lambda_sweep_fold_metrics.json\n\u2502       \u2502   \u251c\u2500\u2500 lambda_sweep_summary.json\n\u2502       \u2502   \u2514\u2500\u2500 lambda_sweep_table.csv\n\u2502       \u2502\n\u2502       \u2514\u2500\u2500 statistical_analysis/\n\u2502           \u2514\u2500\u2500 lambda_0.5_vs_0.0_significance_test.json\n\u2502\n\u2514\u2500\u2500 models/\n\u2502\n\u251c\u2500\u2500 backbone_benchmark_models/\n\u2502   \u251c\u2500\u2500 DeepConvNet/\n\u2502   \u251c\u2500\u2500 EEGNet/\n\u2502   \u2514\u2500\u2500 ShallowConvNet/\n\u2502\n\u2514\u2500\u2500 projection_icrr_models/\n\u251c\u2500\u2500 embeddings_lambda_0.0.npz\n\u251c\u2500\u2500 embeddings_lambda_0.1.npz\n\u251c\u2500\u2500 embeddings_lambda_0.5.npz\n\u2514\u2500\u2500 embeddings_lambda_1.0.npz",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "paths.py",
+    "type": "file_role",
+    "content": "paths.py - python module referenced in the conversation",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "matplotlib.py",
+    "type": "file_role",
+    "content": "matplotlib.py - python module referenced in the conversation",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "config.py",
+    "type": "file_role",
+    "content": "config.py - project configuration",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "__init__.py",
+    "type": "file_role",
+    "content": "__init__.py - package initializer",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "classical_models.py",
+    "type": "file_role",
+    "content": "classical_models.py - model wrapper or embedding logic",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "deep_models.py",
+    "type": "file_role",
+    "content": "deep_models.py - model wrapper or embedding logic",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "data_loading.py",
+    "type": "file_role",
+    "content": "data_loading.py - python module referenced in the conversation",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "evaluation.py",
+    "type": "file_role",
+    "content": "evaluation.py - python module referenced in the conversation",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "preprocessing.py",
+    "type": "file_role",
+    "content": "preprocessing.py - python module referenced in the conversation",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "src/deep_models.py",
+    "type": "file_role",
+    "content": "src/deep_models.py - model wrapper or embedding logic",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "src/evaluation.py",
+    "type": "file_role",
+    "content": "src/evaluation.py - python module referenced in the conversation",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "src.",
+    "type": "module_import",
+    "content": "src.",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "mne\nimport numpy",
+    "type": "module_import",
+    "content": "mne\nimport numpy",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "torch\nimport torch.nn",
+    "type": "module_import",
+    "content": "torch\nimport torch.nn",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "numpy",
+    "type": "module_import",
+    "content": "numpy",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "sklearn.metrics.pairwise.cosine_similarity\r\nfrom sklearn.decomposition import PCA\r\nimport umap",
+    "type": "module_import",
+    "content": "sklearn.metrics.pairwise.cosine_similarity\r\nfrom sklearn.decomposition import PCA\r\nimport umap",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "sklearn.metrics.pairwise",
+    "type": "module_import",
+    "content": "sklearn.metrics.pairwise",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "sklearn.metrics.pairwise.cosine_similarity\r\nfrom sklearn.manifold import TSNE",
+    "type": "module_import",
+    "content": "sklearn.metrics.pairwise.cosine_similarity\r\nfrom sklearn.manifold import TSNE",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "mne.decoding",
+    "type": "module_import",
+    "content": "mne.decoding",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "mne.decoding.CSP\nfrom sklearn.discriminant_analysis import LinearDiscriminantAnalysis\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.metrics import accuracy_score\n\ndef train_csp_lda",
+    "type": "module_import",
+    "content": "mne.decoding.CSP\nfrom sklearn.discriminant_analysis import LinearDiscriminantAnalysis\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.pipeline import Pipeline\nfrom sklearn.metrics import accuracy_score\n\ndef train_csp_lda",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "mne.datasets",
+    "type": "module_import",
+    "content": "mne.datasets",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "mne.datasets.eegbci\n\ndef load_subject_physionet",
+    "type": "module_import",
+    "content": "mne.datasets.eegbci\n\ndef load_subject_physionet",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "sklearn.metrics",
+    "type": "module_import",
+    "content": "sklearn.metrics",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "sklearn.metrics.accuracy_score\n\ndef compute_accuracy",
+    "type": "module_import",
+    "content": "sklearn.metrics.accuracy_score\n\ndef compute_accuracy",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "command",
+    "type": "command",
+    "content": "make me understand everything using the backbone ce, backbone ce+icrr, projection only, projection + icrr narrative",
+    "source_conversation": "bf1b280b",
+    "source": "dev_extraction"
+  },
+  {
+    "project": "ai_context",
+    "topic": "context_summary",
+    "type": "summary",
+    "content": "### Summary of Project Progress and Next Steps\n\n#### Chunk 1: Fixing Paths in `02_classical_ml_benchmark.ipynb`\n- **Progress**: Fixed paths for `02_classical_ml_benchmark.ipynb` to match the new folder structure.\n- **Next Steps**:\n  - Refactor notebooks 03\u201307 similarly by updating root path logic and directory structures.\n\n#### Chunk 2: Fixing Paths in `01_physionet_baseline_pipeline.ipynb`\n- **Progress**: Corrected the root depth and directory structure in `01_physionet_baseline_pipeline.ipynb`.\n- **Next Steps**:\n  - Refactor notebooks 02\u201307 to import models and evaluation logic from `src/`.\n\n#### Chunk 3: Modularizing Code\n- **Goal**: Ensure consistent and reproducible research by modularizing code.\n- **Architecture & Decisions**:\n  - Define models in one place (`src/deep_models.py`).\n  - Centralize evaluation functions in `src/evaluation.py`.\n  - Store preprocessing utilities in `src/preprocessing.py`.\n\n#### Chunk 4: Refactoring Notebooks\n- **Progress**: `03_deep_model_benchmark.ipynb` refactored to import models and evaluation logic from `src/deep_models.py` and `src/evaluation.py`.\n- **Next Steps**:\n  - Move model definitions into `src/deep_models.py`.\n  - Keep training loops inside the notebook for minimal change.\n  - Repeat this process for notebooks 04, 05, 06, and 07.\n\n#### Chunk 5: Fixing Paths in Remaining Notebooks\n- **Progress**: Corrected paths in `02_classical_ml_benchmark.ipynb`.\n- **Next Steps**:\n  - Refactor remaining notebooks (03\u201307) to follow the same structure.\n  - Ensure no redundant code and consistent directory structures.\n\n#### Chunk 6: Ensuring Consistent Training Behavior\n- **Goal**: Prevent hidden version mismatches and inconsistent training behavior across notebooks.\n- **Architecture & Decisions**:\n  - Define models, evaluation metrics, and preprocessing utilities in `src/`.\n  - Import these from the `src` directory to maintain consistency.\n\n#### Chunk 7: Implementing a Specific Feature\n- **Progress**: Discussed pros and cons of two potential solutions but not yet decided on one.\n- **Next Steps**:\n  - Make a final decision between Solution A and Solution B based on performance, maintainability, and team expertise.\n  - Begin implementation of the chosen solution.\n\n### Detailed Next Steps\n\n#### Refactoring Notebooks\n1. **03_deep_model_benchmark.ipynb**\n   ```python\n   # CELL 1 \u2014 FIX ROOT + DIRECTORY STRUCTURE\n   import os\n   from pathlib import Path\n\n   root_dir = Path('..', '..', '..').resolve()\n   models_dir = root_dir / 'models' / 'backbone_benchmark_models'\n   tables_dir = root_dir / 'results' / 'tables' / 'backbone_benchmarking'\n\n   # DATA PATH FIX\n   data_path = root_dir / 'datasets'\n\n   # MODEL SAVE PATH (Already Correct After Fix)\n   model_save_path = models_dir\n\n   # CLASSICAL RESULTS CSV (Already Correct After Fix)\n   classical_results_csv = tables_dir / 'classical_ml_kfold_results.csv'\n\n   # EEGNET HOLDOUT CSV (Already Correct After Fix)\n   eegnet_holdout_csv = tables_dir / 'eegnet_holdout_results.csv'\n   ```\n\n2. **04_bnci_classical_ml_benchmark.ipynb**\n   ```python\n   from src.deep_models import DeepConvNet, ShallowConvNet\n   from src.evaluation import compute_accuracy, compute_ess\n\n   # Import preprocessing functions if needed\n   from src.preprocessing import bandpass_filter, standardize_epochs\n   ```\n\n3. **05_bnci_deep_model_benchmark.ipynb**\n   ```python\n   from src.deep_models import DeepConvNet, ShallowConvNet\n   from src.evaluation import compute_accuracy, compute_ess\n\n   # Import preprocessing functions if needed\n   from src.preprocessing import bandpass_filter, standardize_epochs\n   ```\n\n4. **06_bnci_classical_ml_benchmark.ipynb**\n   ```python\n   from src.deep_models import DeepConvNet, ShallowConvNet\n   from src.evaluation import compute_accuracy, compute_ess\n\n   # Import preprocessing functions if needed\n   from src.preprocessing import bandpass_filter, standardize_epochs\n   ```\n\n5. **07_bnci_deep_model_benchmark.ipynb**\n   ```python\n   from src.deep_models import DeepConvNet, ShallowConvNet\n   from src.evaluation import compute_accuracy, compute_ess\n\n   # Import preprocessing functions if needed\n   from src.preprocessing import bandpass_filter, standardize_epochs\n   ```\n\n#### Final Decision and Implementation\n1. **Make a Final Decision**:\n   - Evaluate the pros and cons of Solution A and Solution B.\n   - Choose the solution that best fits the project requirements.\n\n2. **Implement Chosen Solution**:\n   - Begin implementation based on the chosen solution.\n   - Ensure all notebooks follow the same structure and use consistent code.\n\n### Conclusion\nBy following these steps, we can ensure a modular, maintainable, and reproducible research environment. This will help in preventing hidden version mismatches and maintaining consistency across experiments.",
+    "source_conversation": "bf1b280b",
     "source": "context_extraction"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "architecture",
-    "type": "folder_structure",
-    "content": "src\n- app\n  - controllers\n  - models\n  - routes\n- config\n- public\n- tests",
-    "source_conversation": "ac82724e",
-    "source": "context_extraction"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "architecture",
-    "type": "file_role",
-    "content": "app/controllers/user_controller.py handles user-related operations.",
-    "source_conversation": "ac82724e",
-    "source": "context_extraction"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "architecture",
-    "type": "setup_step",
-    "content": "Install dependencies using pip install -r requirements.txt",
-    "source_conversation": "ac82724e",
-    "source": "context_extraction"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "architecture",
-    "type": "command",
-    "content": "python manage.py runserver",
-    "source_conversation": "ac82724e",
-    "source": "context_extraction"
-  },
-  {
-    "project": "ai_context_memory_system",
-    "topic": "architecture",
-    "type": "entrypoint",
-    "content": "The main entry point is defined in app/main.py",
-    "source_conversation": "ac82724e",
-    "source": "context_extraction"
-  },
-  {
-    "topic": "architecture",
-    "type": "folder_structure",
-    "content": "src\n\u251c\u2500\u2500 cli\n\u2502   \u2514\u2500\u2500 session.py\n\u251c\u2500\u2500 parser\n\u2502   \u251c\u2500\u2500 __init__.py\n\u2502   \u251c\u2500\u2500 chat_parser.py\n\u2502   \u2514\u2500\u2500 schema.py\n\u251c\u2500\u2500 llm_backend\n\u2502   \u2514\u2500\u2500 qwen2_5_7b_instruct.py\n\u251c\u2500\u2500 vector_search\n\u2502   \u251c\u2500\u2500 faiss_index.py\n\u2502   \u2514\u2500\u2500 embedding_generator.py\n\u2514\u2500\u2500 memory_packet\n    \u2514\u2500\u2500 packet.py",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "architecture",
-    "type": "file_role",
-    "content": "session.py: Manages the creation and management of sessions for conversation ingestion.\nchat_parser.py: Responsible for parsing user messages, assistant responses, and maintaining conversation order.\nschema.py: Defines the schema for extracting structured data from conversations.\nqwen2_5_7b_instruct.py: Implements the LLM backend using Qwen 2.5-7B-Instruct model.\nfaiss_index.py: Manages the FAISS index for vector search and semantic recall.\nembedding_generator.py: Generates embeddings locally to be stored in the FAISS index.\npacket.py: Represents a memory packet, which is a structured data unit containing extracted knowledge units.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "architecture",
-    "type": "dependency",
-    "content": "pip install playwright\npip install faiss-cpu\npip install numpy\npip install torch",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "architecture",
-    "type": "setup_step",
-    "content": "python -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "architecture",
-    "type": "workflow",
-    "content": "ChatGPT share link ingestion -> Conversation parsing -> LLM knowledge extraction -> Memory packet generation -> FAISS indexing -> Context snapshot generation",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "architecture",
-    "type": "entrypoint",
-    "content": "python src/cli/session.py",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "architecture",
-    "type": "command",
-    "content": "python -m venv venv\nsource venv/bin/activate\npip install -r requirements.txt\npython src/cli/session.py --help",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "ingestion \u2192 extraction \u2192 packets \u2192 embeddings \u2192 retrieval \u2192 context_snapshot",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "Current packets do not track time or versioning. Example packet: { 'id': 'unique_id', 'content': 'knowledge_content', 'timestamp': 'current_timestamp' }",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "No specific dependencies mentioned in the conversation.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "setup_step",
-    "content": "No setup steps explicitly mentioned, but it implies setting up a system for memory extraction and retrieval.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "Current workflow: Ingestion \u2192 Extraction \u2192 Packets \u2192 Embeddings \u2192 Retrieval \u2192 Context Snapshot\nUpgraded workflow: Ingestion \u2192 Extraction \u2192 Duplicate Detection & Merging \u2192 Packets with Time Tracking \u2192 Embeddings \u2192 Versioned Project Memory \u2192 Cross-LLM Context Injection",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "entrypoint",
-    "content": "No specific entrypoints mentioned, but it implies starting from ingestion and moving through the pipeline.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "No specific commands mentioned in the conversation.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "project_goal",
-    "type": "workflow",
-    "content": "Create a persistent memory layer for AI tools that automatically attaches context to new queries and transfers project knowledge.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "current_progress",
-    "type": "folder_structure",
-    "content": "The current system extracts durable knowledge from conversations but does not yet transfer the full developer environment (repo structure, code relationships, dependencies).",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "Developers need to understand the repository structure and file responsibilities. The system should automatically analyze the repo and produce structured knowledge.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "current_progress",
-    "type": "file_role",
-    "content": "Example information needed includes understanding what each file does, module purpose, and code responsibilities. This is essential for someone else to run the project.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "The system should map dependencies such as libraries, tools, frameworks, and models that are used in the project.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "current_progress",
-    "type": "setup_step",
-    "content": "Add a repository ingestion module to automatically analyze the repo and produce structured knowledge. This will help another developer understand the repo instantly.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "entrypoint",
-    "content": "The system should have entrypoints and main pipeline scripts that define how the project is executed and its workflow.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "Folder structures are not explicitly mentioned in the conversation, but based on typical project setups, common folder structures might include:\n- src/\n  - app/\n  - config/\n  - db/\n  - tests/",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "File responsibilities are not explicitly mentioned in the conversation, but based on typical project setups, common file roles might include:\n- extractor.py: handles schema guided memory extraction\n- install_requirements.sh: script to install dependencies",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "Dependencies are not explicitly mentioned in the conversation, but based on typical project setups, common dependencies might include:\n- FAISS\n- Ollama",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "Setup commands: install_requirements.sh\nRun commands: Not explicitly mentioned\nTest commands: Not explicitly mentioned",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "Execution flow is not explicitly mentioned in the conversation, but based on typical project setups, common workflow might include:\n- Run setup script (install_requirements.sh)\n- Start pipeline\n- Handle schema guided memory extraction",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "src/\n  dev_extractor.py\n  context_builder.py\n  memory_sync.py\nprompts/\n  dev_memory_prompt.txt",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "dev_extractor.py - Creates a module that uses the existing Ollama backend.\nmemory_sync.py - Ingestion script where the developer context bundle is built.\ncontext_builder.py - Builds a developer context bundle when another developer queries the system.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "package_layout",
-    "content": "The repository structure includes src/ for source code, prompts/ for prompts used in extraction, and dependencies are managed through Python's standard package management.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "Ollama",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "No specific setup or run commands were mentioned, but the system likely uses standard Python package management tools.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "The workflow involves extending the packet schema and modifying the LLM extraction prompt to capture developer artifacts. The memory extraction will output more expressive packet types, becoming a general project knowledge extractor.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "Below is the precise set of files to modify and what to add.\n\nFile to update\n- If you do not currently have a central schema file, create one. The goal is to expand the allowed packet types.\n- (or whatever file you currently pass to Ollama)\nReplace the instruction section with this richer version.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "No other changes required in this file.\nor whatever file you currently pass to Ollama\nReplace the instruction section with this richer version.\nThis is the most important modification.\nIt enables the extractor to capture:\n- folder structures\n- file explanations\n- developer setup instructions",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "Your context builder currently probably prints a generic summary. It should now group packets by type so developers can understand the project quickly.\nReplace your current builder with something like this.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "Below is the reasoning and recommended architecture.\nA unified extractor prompt has to optimize for two different tasks:\n- Conceptual knowledge\n- architecture\n- research insights\n- Developer artifacts\n- folder structures\n- file responsibilities\n- setup instructions\n- entrypoints\n- dependencies",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "Example problem:\nConversation text:\nA generic extractor might output:\nBut a developer needs:",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "Below is the reasoning and recommended architecture.\n- Usetwo extraction passes.\nBoth outputs are stored in the same packet store.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "You can add stricter rules like:",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "memory_sync.py",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "memory_sync.py: Contains the main pipeline scripts for running both context extraction and developer extraction.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "FAISS",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "Modify where packets are stored: Example addition - For context packets, add a flag to allow filtering later.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "memory_sync.py: Runs both context extraction and developer extraction, then merges the outputs before storing them together.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "entrypoint",
-    "content": "memory_sync.py: The entry point for running the main pipeline scripts.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "folders",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "files",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "package layout",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "what each file does, module purpose, code responsibilities",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "entrypoints, main pipeline scripts, system workflow",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "libraries, tools, frameworks, models",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "setup_step",
-    "content": "setup commands",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "run commands, test commands",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "root\n\u251c\u2500\u2500 memory_sync.py\n\u2514\u2500\u2500 utils\n    \u251c\u2500\u2500 chunking_util.py\n    \u2514\u2500\u2500 deduplication_util.py",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "memory_sync.py: Handles the extraction and saving of developer packets, now includes calls to chunking and duplicate removal utilities.\nutils/chunking_util.py: Utility file for splitting long conversations into smaller pieces before LLM extraction.\nutils/deduplication_util.py: Utility file for removing repeated packets before saving.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "No new dependencies were added. Existing dependencies remain unchanged.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "setup_step",
-    "content": "To set up the system, ensure that memory_sync.py includes imports for chunking_util.py and deduplication_util.py.\nRun the following commands to generate a project context snapshot:\npython -m your_module.snapshot_generator",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "The system workflow involves running memory_sync.py, which now includes calls to chunking and duplicate removal utilities. The pipeline remains stable with no other changes required.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "entrypoint",
-    "content": "memory_sync.py is the main entrypoint for the system.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "To run the modified pipeline, use:\npython memory_sync.py\nTo generate a project context snapshot, use:\npython -m your_module.snapshot_generator",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "The repository structure is not explicitly detailed in this conversation, but it can be inferred that there are multiple files and folders related to different aspects of the project.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "Snapshot script: The file responsible for generating snapshots. It now includes saving output to a .txt file.\n\nordered_topics: A list that defines which topics are included in the snapshot, such as 'folder_structure', 'file_role', and others.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "No explicit mention of dependencies is made in this conversation. However, it can be inferred that there are dependencies related to the project's functionality, such as libraries, tools, or frameworks used for ingestion, extraction, and FAISS indexing.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "setup_step",
-    "content": "Modify the snapshot script by appending developer topics to ordered_topics.\n\nRun commands: Modify the snapshot script with only necessary modifications.\n\nTest commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "The workflow involves generating snapshots of the project. The output is saved to a .txt file which includes both conceptual project knowledge and developer onboarding information.\n\nEntry points: The script that generates the snapshot.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "Modify the snapshot script by appending developer topics to ordered_topics.\n\nRun commands: Modify the snapshot script with only necessary modifications.\n\nTest commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "project_goal",
-    "type": "folder_structure",
-    "content": "dev_schema.py",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "project_goal",
-    "type": "file_role",
-    "content": "dev_extraction_prompt.py: Contains the developer extraction schema. Should not be duplicated in ollama_client.py.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "project_goal",
-    "type": "dependency",
-    "content": "ollama_client.py: Should only handle LLM API calls and should not contain extraction schemas.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "project_goal",
-    "type": "command",
-    "content": "You can open the saved output file directly in ChatGPT, Claude, or Gemini.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "dev_extraction_prompt.py\nollama_client.py",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "dev_extraction_prompt.py: Contains the LLM prompt for extracting developer knowledge.\nollama_client.py: Contains code that calls Ollama.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "No explicit dependencies mentioned, but it is implied that ollama_client.py interacts with an external service or library.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "setup_step",
-    "content": "Not explicitly stated, but the setup likely involves ensuring the Ollama client can be called properly.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "workflow",
-    "content": "The workflow starts with dev_extraction_prompt.py generating a prompt for extracting developer knowledge and then ollama_client.py processing this request to extract relevant information.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "entrypoint",
-    "content": "dev_extraction_prompt.py: The entry point for the extraction process.\nollama_client.py: A secondary script that processes the prompt and interacts with Ollama.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "Not explicitly stated, but it is implied that there are commands to run dev_extraction_prompt.py and ollama_client.py.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "folder_structure",
-    "content": "project_root_directory",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "file_role",
-    "content": "The program will ask: Press ENTER on an empty line when done.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "Qwen2.5 via Ollama",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "setup_step",
-    "content": "Start Ollama if needed:\nThen confirm the model exists:",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "entrypoint",
-    "content": "From your project root directory: The program will ask: Press ENTER on an empty line when done.",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "Start Ollama if needed:\nThen confirm the model exists:",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "architecture",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "folder structures",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "dependency",
-    "content": "setup steps",
-    "source": "dev_extraction"
-  },
-  {
-    "topic": "repository_structure",
-    "type": "command",
-    "content": "The system extracts: architecture\nfolder structures\nsetup steps",
-    "source": "dev_extraction"
   }
 ]

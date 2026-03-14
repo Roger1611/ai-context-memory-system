@@ -1,264 +1,120 @@
 PROJECT CONTEXT SNAPSHOT
+=========================
 
-Project Goal
-- Create a persistent memory layer for AI tools that automatically attaches context to new queries and transfers project knowledge.
-- dev_schema.py
-- dev_extraction_prompt.py: Contains the developer extraction schema. Should not be duplicated in ollama_client.py.
-- ollama_client.py: Should only handle LLM API calls and should not contain extraction schemas.
-- You can open the saved output file directly in ChatGPT, Claude, or Gemini.
+### Summary of Project Progress and Next Steps
 
-Problem Statement
-- information not available yet
+#### Chunk 1: Fixing Paths in `02_classical_ml_benchmark.ipynb`
+- **Progress**: Fixed paths for `02_classical_ml_benchmark.ipynb` to match the new folder structure.
+- **Next Steps**:
+  - Refactor notebooks 03–07 similarly by updating root path logic and directory structures.
 
-Architecture
-- The project involves building a web application with a backend and frontend.
-- src
-- app
-  - controllers
-  - models
-  - routes
-- config
-- public
-- tests
-- app/controllers/user_controller.py handles user-related operations.
-- Install dependencies using pip install -r requirements.txt
-- python manage.py runserver
-- The main entry point is defined in app/main.py
-- src
-├── cli
-│   └── session.py
-├── parser
-│   ├── __init__.py
-│   ├── chat_parser.py
-│   └── schema.py
-├── llm_backend
-│   └── qwen2_5_7b_instruct.py
-├── vector_search
-│   ├── faiss_index.py
-│   └── embedding_generator.py
-└── memory_packet
-    └── packet.py
-- session.py: Manages the creation and management of sessions for conversation ingestion.
-chat_parser.py: Responsible for parsing user messages, assistant responses, and maintaining conversation order.
-schema.py: Defines the schema for extracting structured data from conversations.
-qwen2_5_7b_instruct.py: Implements the LLM backend using Qwen 2.5-7B-Instruct model.
-faiss_index.py: Manages the FAISS index for vector search and semantic recall.
-embedding_generator.py: Generates embeddings locally to be stored in the FAISS index.
-packet.py: Represents a memory packet, which is a structured data unit containing extracted knowledge units.
-- pip install playwright
-pip install faiss-cpu
-pip install numpy
-pip install torch
-- python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-- ChatGPT share link ingestion -> Conversation parsing -> LLM knowledge extraction -> Memory packet generation -> FAISS indexing -> Context snapshot generation
-- python src/cli/session.py
-- python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python src/cli/session.py --help
+#### Chunk 2: Fixing Paths in `01_physionet_baseline_pipeline.ipynb`
+- **Progress**: Corrected the root depth and directory structure in `01_physionet_baseline_pipeline.ipynb`.
+- **Next Steps**:
+  - Refactor notebooks 02–07 to import models and evaluation logic from `src/`.
 
-Repository Structure
-- ingestion → extraction → packets → embeddings → retrieval → context_snapshot
-- Current packets do not track time or versioning. Example packet: { 'id': 'unique_id', 'content': 'knowledge_content', 'timestamp': 'current_timestamp' }
-- No specific dependencies mentioned in the conversation.
-- No setup steps explicitly mentioned, but it implies setting up a system for memory extraction and retrieval.
-- Current workflow: Ingestion → Extraction → Packets → Embeddings → Retrieval → Context Snapshot
-Upgraded workflow: Ingestion → Extraction → Duplicate Detection & Merging → Packets with Time Tracking → Embeddings → Versioned Project Memory → Cross-LLM Context Injection
-- No specific entrypoints mentioned, but it implies starting from ingestion and moving through the pipeline.
-- No specific commands mentioned in the conversation.
-- Developers need to understand the repository structure and file responsibilities. The system should automatically analyze the repo and produce structured knowledge.
-- The system should map dependencies such as libraries, tools, frameworks, and models that are used in the project.
-- The system should have entrypoints and main pipeline scripts that define how the project is executed and its workflow.
-- Folder structures are not explicitly mentioned in the conversation, but based on typical project setups, common folder structures might include:
-- src/
-  - app/
-  - config/
-  - db/
-  - tests/
-- File responsibilities are not explicitly mentioned in the conversation, but based on typical project setups, common file roles might include:
-- extractor.py: handles schema guided memory extraction
-- install_requirements.sh: script to install dependencies
-- Dependencies are not explicitly mentioned in the conversation, but based on typical project setups, common dependencies might include:
-- FAISS
-- Ollama
-- Setup commands: install_requirements.sh
-Run commands: Not explicitly mentioned
-Test commands: Not explicitly mentioned
-- Execution flow is not explicitly mentioned in the conversation, but based on typical project setups, common workflow might include:
-- Run setup script (install_requirements.sh)
-- Start pipeline
-- Handle schema guided memory extraction
-- src/
-  dev_extractor.py
-  context_builder.py
-  memory_sync.py
-prompts/
-  dev_memory_prompt.txt
-- dev_extractor.py - Creates a module that uses the existing Ollama backend.
-memory_sync.py - Ingestion script where the developer context bundle is built.
-context_builder.py - Builds a developer context bundle when another developer queries the system.
-- The repository structure includes src/ for source code, prompts/ for prompts used in extraction, and dependencies are managed through Python's standard package management.
-- Ollama
-- No specific setup or run commands were mentioned, but the system likely uses standard Python package management tools.
-- The workflow involves extending the packet schema and modifying the LLM extraction prompt to capture developer artifacts. The memory extraction will output more expressive packet types, becoming a general project knowledge extractor.
-- Below is the precise set of files to modify and what to add.
+#### Chunk 3: Modularizing Code
+- **Goal**: Ensure consistent and reproducible research by modularizing code.
+- **Architecture & Decisions**:
+  - Define models in one place (`src/deep_models.py`).
+  - Centralize evaluation functions in `src/evaluation.py`.
+  - Store preprocessing utilities in `src/preprocessing.py`.
 
-File to update
-- If you do not currently have a central schema file, create one. The goal is to expand the allowed packet types.
-- (or whatever file you currently pass to Ollama)
-Replace the instruction section with this richer version.
-- No other changes required in this file.
-or whatever file you currently pass to Ollama
-Replace the instruction section with this richer version.
-This is the most important modification.
-It enables the extractor to capture:
-- folder structures
-- file explanations
-- developer setup instructions
-- Your context builder currently probably prints a generic summary. It should now group packets by type so developers can understand the project quickly.
-Replace your current builder with something like this.
-- Below is the reasoning and recommended architecture.
-A unified extractor prompt has to optimize for two different tasks:
-- Conceptual knowledge
-- architecture
-- research insights
-- Developer artifacts
-- folder structures
-- file responsibilities
-- setup instructions
-- entrypoints
-- dependencies
-- Example problem:
-Conversation text:
-A generic extractor might output:
-But a developer needs:
-- Below is the reasoning and recommended architecture.
-- Usetwo extraction passes.
-Both outputs are stored in the same packet store.
-- You can add stricter rules like:
-- memory_sync.py
-- memory_sync.py: Contains the main pipeline scripts for running both context extraction and developer extraction.
-- FAISS
-- Modify where packets are stored: Example addition - For context packets, add a flag to allow filtering later.
-- memory_sync.py: Runs both context extraction and developer extraction, then merges the outputs before storing them together.
-- memory_sync.py: The entry point for running the main pipeline scripts.
-- folders
-- files
-- package layout
-- what each file does, module purpose, code responsibilities
-- entrypoints, main pipeline scripts, system workflow
-- libraries, tools, frameworks, models
-- setup commands
-- run commands, test commands
-- root
-├── memory_sync.py
-└── utils
-    ├── chunking_util.py
-    └── deduplication_util.py
-- memory_sync.py: Handles the extraction and saving of developer packets, now includes calls to chunking and duplicate removal utilities.
-utils/chunking_util.py: Utility file for splitting long conversations into smaller pieces before LLM extraction.
-utils/deduplication_util.py: Utility file for removing repeated packets before saving.
-- No new dependencies were added. Existing dependencies remain unchanged.
-- To set up the system, ensure that memory_sync.py includes imports for chunking_util.py and deduplication_util.py.
-Run the following commands to generate a project context snapshot:
-python -m your_module.snapshot_generator
-- The system workflow involves running memory_sync.py, which now includes calls to chunking and duplicate removal utilities. The pipeline remains stable with no other changes required.
-- memory_sync.py is the main entrypoint for the system.
-- To run the modified pipeline, use:
-python memory_sync.py
-To generate a project context snapshot, use:
-python -m your_module.snapshot_generator
-- The repository structure is not explicitly detailed in this conversation, but it can be inferred that there are multiple files and folders related to different aspects of the project.
-- Snapshot script: The file responsible for generating snapshots. It now includes saving output to a .txt file.
+#### Chunk 4: Refactoring Notebooks
+- **Progress**: `03_deep_model_benchmark.ipynb` refactored to import models and evaluation logic from `src/deep_models.py` and `src/evaluation.py`.
+- **Next Steps**:
+  - Move model definitions into `src/deep_models.py`.
+  - Keep training loops inside the notebook for minimal change.
+  - Repeat this process for notebooks 04, 05, 06, and 07.
 
-ordered_topics: A list that defines which topics are included in the snapshot, such as 'folder_structure', 'file_role', and others.
-- No explicit mention of dependencies is made in this conversation. However, it can be inferred that there are dependencies related to the project's functionality, such as libraries, tools, or frameworks used for ingestion, extraction, and FAISS indexing.
-- Modify the snapshot script by appending developer topics to ordered_topics.
+#### Chunk 5: Fixing Paths in Remaining Notebooks
+- **Progress**: Corrected paths in `02_classical_ml_benchmark.ipynb`.
+- **Next Steps**:
+  - Refactor remaining notebooks (03–07) to follow the same structure.
+  - Ensure no redundant code and consistent directory structures.
 
-Run commands: Modify the snapshot script with only necessary modifications.
+#### Chunk 6: Ensuring Consistent Training Behavior
+- **Goal**: Prevent hidden version mismatches and inconsistent training behavior across notebooks.
+- **Architecture & Decisions**:
+  - Define models, evaluation metrics, and preprocessing utilities in `src/`.
+  - Import these from the `src` directory to maintain consistency.
 
-Test commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.
-- The workflow involves generating snapshots of the project. The output is saved to a .txt file which includes both conceptual project knowledge and developer onboarding information.
+#### Chunk 7: Implementing a Specific Feature
+- **Progress**: Discussed pros and cons of two potential solutions but not yet decided on one.
+- **Next Steps**:
+  - Make a final decision between Solution A and Solution B based on performance, maintainability, and team expertise.
+  - Begin implementation of the chosen solution.
 
-Entry points: The script that generates the snapshot.
-- Modify the snapshot script by appending developer topics to ordered_topics.
+### Detailed Next Steps
 
-Run commands: Modify the snapshot script with only necessary modifications.
+#### Refactoring Notebooks
+1. **03_deep_model_benchmark.ipynb**
+   ```python
+   # CELL 1 — FIX ROOT + DIRECTORY STRUCTURE
+   import os
+   from pathlib import Path
 
-Test commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.
-- dev_extraction_prompt.py
-ollama_client.py
-- dev_extraction_prompt.py: Contains the LLM prompt for extracting developer knowledge.
-ollama_client.py: Contains code that calls Ollama.
-- No explicit dependencies mentioned, but it is implied that ollama_client.py interacts with an external service or library.
-- Not explicitly stated, but the setup likely involves ensuring the Ollama client can be called properly.
-- The workflow starts with dev_extraction_prompt.py generating a prompt for extracting developer knowledge and then ollama_client.py processing this request to extract relevant information.
-- dev_extraction_prompt.py: The entry point for the extraction process.
-ollama_client.py: A secondary script that processes the prompt and interacts with Ollama.
-- Not explicitly stated, but it is implied that there are commands to run dev_extraction_prompt.py and ollama_client.py.
-- project_root_directory
-- The program will ask: Press ENTER on an empty line when done.
-- Qwen2.5 via Ollama
-- Start Ollama if needed:
-Then confirm the model exists:
-- From your project root directory: The program will ask: Press ENTER on an empty line when done.
-- Start Ollama if needed:
-Then confirm the model exists:
-- architecture
-- folder structures
-- setup steps
-- The system extracts: architecture
-folder structures
-setup steps
+   root_dir = Path('..', '..', '..').resolve()
+   models_dir = root_dir / 'models' / 'backbone_benchmark_models'
+   tables_dir = root_dir / 'results' / 'tables' / 'backbone_benchmarking'
 
-Completed Components
-- information not available yet
+   # DATA PATH FIX
+   data_path = root_dir / 'datasets'
 
-Current Progress
-- The current system extracts durable knowledge from conversations but does not yet transfer the full developer environment (repo structure, code relationships, dependencies).
-- Example information needed includes understanding what each file does, module purpose, and code responsibilities. This is essential for someone else to run the project.
-- Add a repository ingestion module to automatically analyze the repo and produce structured knowledge. This will help another developer understand the repo instantly.
+   # MODEL SAVE PATH (Already Correct After Fix)
+   model_save_path = models_dir
 
-Important Decisions
-- information not available yet
+   # CLASSICAL RESULTS CSV (Already Correct After Fix)
+   classical_results_csv = tables_dir / 'classical_ml_kfold_results.csv'
 
-Experimental Results
-- information not available yet
+   # EEGNET HOLDOUT CSV (Already Correct After Fix)
+   eegnet_holdout_csv = tables_dir / 'eegnet_holdout_results.csv'
+   ```
 
-Datasets
-- information not available yet
+2. **04_bnci_classical_ml_benchmark.ipynb**
+   ```python
+   from src.deep_models import DeepConvNet, ShallowConvNet
+   from src.evaluation import compute_accuracy, compute_ess
 
-Algorithms
-- information not available yet
+   # Import preprocessing functions if needed
+   from src.preprocessing import bandpass_filter, standardize_epochs
+   ```
 
-Open Questions
-- information not available yet
+3. **05_bnci_deep_model_benchmark.ipynb**
+   ```python
+   from src.deep_models import DeepConvNet, ShallowConvNet
+   from src.evaluation import compute_accuracy, compute_ess
 
-Next Steps
-- information not available yet
+   # Import preprocessing functions if needed
+   from src.preprocessing import bandpass_filter, standardize_epochs
+   ```
 
-Limitations
-- information not available yet
+4. **06_bnci_classical_ml_benchmark.ipynb**
+   ```python
+   from src.deep_models import DeepConvNet, ShallowConvNet
+   from src.evaluation import compute_accuracy, compute_ess
 
-Folder Structure
-- information not available yet
+   # Import preprocessing functions if needed
+   from src.preprocessing import bandpass_filter, standardize_epochs
+   ```
 
-File Role
-- information not available yet
+5. **07_bnci_deep_model_benchmark.ipynb**
+   ```python
+   from src.deep_models import DeepConvNet, ShallowConvNet
+   from src.evaluation import compute_accuracy, compute_ess
 
-Dependency
-- information not available yet
+   # Import preprocessing functions if needed
+   from src.preprocessing import bandpass_filter, standardize_epochs
+   ```
 
-Setup Step
-- information not available yet
+#### Final Decision and Implementation
+1. **Make a Final Decision**:
+   - Evaluate the pros and cons of Solution A and Solution B.
+   - Choose the solution that best fits the project requirements.
 
-Workflow
-- information not available yet
+2. **Implement Chosen Solution**:
+   - Begin implementation based on the chosen solution.
+   - Ensure all notebooks follow the same structure and use consistent code.
 
-Entrypoint
-- information not available yet
-
-Command
-- information not available yet
+### Conclusion
+By following these steps, we can ensure a modular, maintainable, and reproducible research environment. This will help in preventing hidden version mismatches and maintaining consistency across experiments.

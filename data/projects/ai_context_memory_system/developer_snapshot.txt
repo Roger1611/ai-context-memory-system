@@ -1,208 +1,117 @@
-DEVELOPER KNOWLEDGE SNAPSHOT
+DEVELOPER KNOWLEDGE & LATEST REPO INFO
+========================================
 
-Folder Structure
-- src
-├── cli
-│   └── session.py
-├── parser
-│   ├── __init__.py
-│   ├── chat_parser.py
-│   └── schema.py
-├── llm_backend
-│   └── qwen2_5_7b_instruct.py
-├── vector_search
-│   ├── faiss_index.py
-│   └── embedding_generator.py
-└── memory_packet
-    └── packet.py
-- ingestion → extraction → packets → embeddings → retrieval → context_snapshot
-- The current system extracts durable knowledge from conversations but does not yet transfer the full developer environment (repo structure, code relationships, dependencies).
-- Developers need to understand the repository structure and file responsibilities. The system should automatically analyze the repo and produce structured knowledge.
-- Folder structures are not explicitly mentioned in the conversation, but based on typical project setups, common folder structures might include:
-- src/
-  - app/
-  - config/
-  - db/
-  - tests/
-- src/
-  dev_extractor.py
-  context_builder.py
-  memory_sync.py
-prompts/
-  dev_memory_prompt.txt
-- Below is the precise set of files to modify and what to add.
+### FOLDER STRUCTURE
 
-File to update
-- If you do not currently have a central schema file, create one. The goal is to expand the allowed packet types.
-- (or whatever file you currently pass to Ollama)
-Replace the instruction section with this richer version.
-- Below is the reasoning and recommended architecture.
-A unified extractor prompt has to optimize for two different tasks:
-- Conceptual knowledge
-- architecture
-- research insights
-- Developer artifacts
-- folder structures
-- file responsibilities
-- setup instructions
-- entrypoints
-- dependencies
-- Example problem:
-Conversation text:
-A generic extractor might output:
-But a developer needs:
-- memory_sync.py
-- folders
-- files
-- package layout
-- root
-├── memory_sync.py
-└── utils
-    ├── chunking_util.py
-    └── deduplication_util.py
-- The repository structure is not explicitly detailed in this conversation, but it can be inferred that there are multiple files and folders related to different aspects of the project.
-- dev_schema.py
-- dev_extraction_prompt.py
-ollama_client.py
-- project_root_directory
+EEG_REPRESENTATION_GEOMETRY/
+│
+├── .vscode/
+├── archive/
+├── datasets/
+│
+├── notebooks/
+│   │
+│   ├── 01_classical_baselines/
+│   │   ├── 01_physionet_baseline_pipeline.ipynb
+│   │   ├── 02_classical_ml_benchmark.ipynb
+│   │   └── 03_deep_model_benchmark.ipynb
+│   │
+│   ├── 02_backbone_selection/
+│   │   ├── 04_bnci_data_preprocessing.ipynb
+│   │   └── 05_bnci_deep_model_benchmark.ipynb
+│   │
+│   └── 03_representation_study/
+│       ├── 06_deepconvnet_icrr_ablation.ipynb
+│       └── 07_projection_head_with_icrr.ipynb
+│
+├── results/
+│   │
+│   ├── figures/
+│   │   │
+│   │   ├── embedding_geometry/
+│   │   │   ├── Block_Similarity_Matrix.png
+│   │   │   ├── ESS_Delta_Waterfall.png
+│   │   │   ├── Global_3D_UMAP.png
+│   │   │   ├── Global_Distance_KDE.png
+│   │   │   ├── Global_PCA_Projection.png
+│   │   │   ├── Global_Similarity_Heatmap.png
+│   │   │   └── Tuned_tSNE.png
+│   │   │
+│   │   ├── model_comparisons/
+│   │   │   ├── UMAP_Backbone_CE.png
+│   │   │   ├── UMAP_Backbone_CE_ICRR.png
+│   │   │   ├── UMAP_Backbone_CE_vs_ICRR.png
+│   │   │   └── UMAP_Projection_vs_ICRR.png
+│   │   │
+│   │   └── regularization_tradeoff/
+│   │       ├── Lambda_Tradeoff.png
+│   │       ├── Lambda_vs_Accuracy.png
+│   │       └── Lambda_vs_ESS.png
+│   │
+│   └── tables/
+│       │
+│       ├── backbone_benchmarking/
+│       │   ├── bnci_deep_models_benchmark.csv
+│       │   ├── classical_ml_kfold_results.csv
+│       │   ├── deepconvnet_kfold_results.csv
+│       │   ├── eegnet_holdout_results.csv
+│       │   ├── eegnet_kfold_results.csv
+│       │   └── shallowconvnet_kfold_results.csv
+│       │
+│       ├── projection_icrr_ablation/
+│       │   ├── compactness_summary.json
+│       │   ├── lambda_sweep_fold_metrics.json
+│       │   ├── lambda_sweep_summary.json
+│       │   └── lambda_sweep_table.csv
+│       │
+│       └── statistical_analysis/
+│           └── lambda_0.5_vs_0.0_significance_test.json
+│
+└── models/
+│
+├── backbone_benchmark_models/
+│   ├── DeepConvNet/
+│   ├── EEGNet/
+│   └── ShallowConvNet/
+│
+└── projection_icrr_models/
+├── embeddings_lambda_0.0.npz
+├── embeddings_lambda_0.1.npz
+├── embeddings_lambda_0.5.npz
+└── embeddings_lambda_1.0.npz
 
-File Role
-- session.py: Manages the creation and management of sessions for conversation ingestion.
-chat_parser.py: Responsible for parsing user messages, assistant responses, and maintaining conversation order.
-schema.py: Defines the schema for extracting structured data from conversations.
-qwen2_5_7b_instruct.py: Implements the LLM backend using Qwen 2.5-7B-Instruct model.
-faiss_index.py: Manages the FAISS index for vector search and semantic recall.
-embedding_generator.py: Generates embeddings locally to be stored in the FAISS index.
-packet.py: Represents a memory packet, which is a structured data unit containing extracted knowledge units.
-- Current packets do not track time or versioning. Example packet: { 'id': 'unique_id', 'content': 'knowledge_content', 'timestamp': 'current_timestamp' }
-- Example information needed includes understanding what each file does, module purpose, and code responsibilities. This is essential for someone else to run the project.
-- File responsibilities are not explicitly mentioned in the conversation, but based on typical project setups, common file roles might include:
-- extractor.py: handles schema guided memory extraction
-- install_requirements.sh: script to install dependencies
-- dev_extractor.py - Creates a module that uses the existing Ollama backend.
-memory_sync.py - Ingestion script where the developer context bundle is built.
-context_builder.py - Builds a developer context bundle when another developer queries the system.
-- No other changes required in this file.
-or whatever file you currently pass to Ollama
-Replace the instruction section with this richer version.
-This is the most important modification.
-It enables the extractor to capture:
-- folder structures
-- file explanations
-- developer setup instructions
-- Your context builder currently probably prints a generic summary. It should now group packets by type so developers can understand the project quickly.
-Replace your current builder with something like this.
-- memory_sync.py: Contains the main pipeline scripts for running both context extraction and developer extraction.
-- what each file does, module purpose, code responsibilities
-- memory_sync.py: Handles the extraction and saving of developer packets, now includes calls to chunking and duplicate removal utilities.
-utils/chunking_util.py: Utility file for splitting long conversations into smaller pieces before LLM extraction.
-utils/deduplication_util.py: Utility file for removing repeated packets before saving.
-- Snapshot script: The file responsible for generating snapshots. It now includes saving output to a .txt file.
 
-ordered_topics: A list that defines which topics are included in the snapshot, such as 'folder_structure', 'file_role', and others.
-- dev_extraction_prompt.py: Contains the developer extraction schema. Should not be duplicated in ollama_client.py.
-- dev_extraction_prompt.py: Contains the LLM prompt for extracting developer knowledge.
-ollama_client.py: Contains code that calls Ollama.
-- The program will ask: Press ENTER on an empty line when done.
+### FILE ROLES
 
-Dependency
-- pip install playwright
-pip install faiss-cpu
-pip install numpy
-pip install torch
-- No specific dependencies mentioned in the conversation.
-- The system should map dependencies such as libraries, tools, frameworks, and models that are used in the project.
-- Dependencies are not explicitly mentioned in the conversation, but based on typical project setups, common dependencies might include:
-- FAISS
-- Ollama
-- Ollama
-- Below is the reasoning and recommended architecture.
-- Usetwo extraction passes.
-Both outputs are stored in the same packet store.
-- FAISS
-- libraries, tools, frameworks, models
-- No new dependencies were added. Existing dependencies remain unchanged.
-- No explicit mention of dependencies is made in this conversation. However, it can be inferred that there are dependencies related to the project's functionality, such as libraries, tools, or frameworks used for ingestion, extraction, and FAISS indexing.
-- ollama_client.py: Should only handle LLM API calls and should not contain extraction schemas.
-- No explicit dependencies mentioned, but it is implied that ollama_client.py interacts with an external service or library.
-- Qwen2.5 via Ollama
-- architecture
-- folder structures
-- setup steps
+- paths.py - python module referenced in the conversation
 
-Setup Step
-- python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-- No setup steps explicitly mentioned, but it implies setting up a system for memory extraction and retrieval.
-- Add a repository ingestion module to automatically analyze the repo and produce structured knowledge. This will help another developer understand the repo instantly.
-- setup commands
-- To set up the system, ensure that memory_sync.py includes imports for chunking_util.py and deduplication_util.py.
-Run the following commands to generate a project context snapshot:
-python -m your_module.snapshot_generator
-- Modify the snapshot script by appending developer topics to ordered_topics.
+- matplotlib.py - python module referenced in the conversation
 
-Run commands: Modify the snapshot script with only necessary modifications.
+- config.py - project configuration
 
-Test commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.
-- Not explicitly stated, but the setup likely involves ensuring the Ollama client can be called properly.
-- Start Ollama if needed:
-Then confirm the model exists:
+- __init__.py - package initializer
 
-Workflow
-- ChatGPT share link ingestion -> Conversation parsing -> LLM knowledge extraction -> Memory packet generation -> FAISS indexing -> Context snapshot generation
-- Current workflow: Ingestion → Extraction → Packets → Embeddings → Retrieval → Context Snapshot
-Upgraded workflow: Ingestion → Extraction → Duplicate Detection & Merging → Packets with Time Tracking → Embeddings → Versioned Project Memory → Cross-LLM Context Injection
-- Create a persistent memory layer for AI tools that automatically attaches context to new queries and transfers project knowledge.
-- Execution flow is not explicitly mentioned in the conversation, but based on typical project setups, common workflow might include:
-- Run setup script (install_requirements.sh)
-- Start pipeline
-- Handle schema guided memory extraction
-- The workflow involves extending the packet schema and modifying the LLM extraction prompt to capture developer artifacts. The memory extraction will output more expressive packet types, becoming a general project knowledge extractor.
-- memory_sync.py: Runs both context extraction and developer extraction, then merges the outputs before storing them together.
-- entrypoints, main pipeline scripts, system workflow
-- The system workflow involves running memory_sync.py, which now includes calls to chunking and duplicate removal utilities. The pipeline remains stable with no other changes required.
-- The workflow involves generating snapshots of the project. The output is saved to a .txt file which includes both conceptual project knowledge and developer onboarding information.
+- classical_models.py - model wrapper or embedding logic
 
-Entry points: The script that generates the snapshot.
-- The workflow starts with dev_extraction_prompt.py generating a prompt for extracting developer knowledge and then ollama_client.py processing this request to extract relevant information.
+- src/deep_models.py - model wrapper or embedding logic
 
-Entrypoint
-- python src/cli/session.py
-- No specific entrypoints mentioned, but it implies starting from ingestion and moving through the pipeline.
-- The system should have entrypoints and main pipeline scripts that define how the project is executed and its workflow.
-- memory_sync.py: The entry point for running the main pipeline scripts.
-- memory_sync.py is the main entrypoint for the system.
-- dev_extraction_prompt.py: The entry point for the extraction process.
-ollama_client.py: A secondary script that processes the prompt and interacts with Ollama.
-- From your project root directory: The program will ask: Press ENTER on an empty line when done.
+- data_loading.py - python module referenced in the conversation
 
-Command
-- python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-python src/cli/session.py --help
-- No specific commands mentioned in the conversation.
-- Setup commands: install_requirements.sh
-Run commands: Not explicitly mentioned
-Test commands: Not explicitly mentioned
-- No specific setup or run commands were mentioned, but the system likely uses standard Python package management tools.
-- You can add stricter rules like:
-- Modify where packets are stored: Example addition - For context packets, add a flag to allow filtering later.
-- run commands, test commands
-- To run the modified pipeline, use:
-python memory_sync.py
-To generate a project context snapshot, use:
-python -m your_module.snapshot_generator
-- Modify the snapshot script by appending developer topics to ordered_topics.
+- src/evaluation.py - python module referenced in the conversation
 
-Run commands: Modify the snapshot script with only necessary modifications.
+- preprocessing.py - python module referenced in the conversation
 
-Test commands: No specific test commands are mentioned, but it can be inferred that there might be tests for the snapshot generation process.
-- You can open the saved output file directly in ChatGPT, Claude, or Gemini.
-- Not explicitly stated, but it is implied that there are commands to run dev_extraction_prompt.py and ollama_client.py.
-- Start Ollama if needed:
-Then confirm the model exists:
-- The system extracts: architecture
-folder structures
-setup steps
+
+### COMMANDS
+
+`make me understand everything using the backbone ce, backbone ce+icrr, projection only, projection + icrr narrative`
+
+
+### ENTRY POINTS
+
+No entry points detected.
+
+
+### CODE BLOCKS
+
+No code blocks detected.

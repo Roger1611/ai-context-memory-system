@@ -1,6 +1,3 @@
-"""
-Test script to verify that Ollama integration works.
-"""
 
 from src.llm import generate_response
 

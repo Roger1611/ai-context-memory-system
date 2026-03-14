@@ -12,8 +12,6 @@ def fetch_share_page(url: str) -> str:
 
         # Launch Chromium browser in headless mode
         browser = p.chromium.launch(headless=True)
-
-        # Create a new browser page
         page = browser.new_page()
 
         print(f"[INFO] Opening share link: {url}")

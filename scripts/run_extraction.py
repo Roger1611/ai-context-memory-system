@@ -1,7 +1,4 @@
-"""
-Extract memory from all stored conversations
-(including session folders).
-"""
+
 from pathlib import Path
 from src.config import RAW_CONVO_DIR
 from src.extraction.memory_extractor import (

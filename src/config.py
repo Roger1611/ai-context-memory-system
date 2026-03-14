@@ -28,4 +28,14 @@ LLM_PROVIDER = "ollama"
 
 OLLAMA_BASE_URL = "http://localhost:11434"
 
-OLLAMA_MODEL = "qwen2.5:7b-instruct"
+# Models
+CONTEXT_MODEL = "qwen2.5:7b-instruct-q4_K_M"
+DEV_MODEL = "qwen2.5-coder:7b"
+
+CONTEXT_MODEL_FALLBACKS = [
+    "qwen2.5:3b-instruct",
+    "llama3.2:3b-instruct",
+    "phi3:mini",
+    "gemma2:2b",
+    "qwen2.5:1.5b-instruct",
+]

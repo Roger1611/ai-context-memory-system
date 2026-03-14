@@ -1,73 +1,31 @@
 import json
-from collections import defaultdict
+import sys
 from src.config import PROCESSED_MEMORY_DIR
 
+
+def _safe_print(text):
+    try:
+        print(text)
+    except UnicodeEncodeError:
+        encoding = sys.stdout.encoding or "utf-8"
+        safe_text = text.encode(encoding, errors="replace").decode(encoding)
+        print(safe_text)
+
 def main():
-
     path = PROCESSED_MEMORY_DIR / "memory_packets.json"
-    with open(path) as f:
-        packets = json.load(f)
-    topics = defaultdict(list)
-    for packet in packets:
-        topics[packet["topic"]].append(packet["content"])
+    if not path.exists(): return
+    with open(path) as f: packets = json.load(f)
 
-    ordered_topics = [
-
-        #CONTEXT KNOWLEDGE
-        "project_goal",
-        "problem_statement",
-        "architecture",
-        "repository_structure",
-        "completed_components",
-        "current_progress",
-        "important_decisions",
-        "experimental_results",
-        "datasets",
-        "algorithms",
-        "open_questions",
-        "next_steps",
-        "limitations",
-
-        # DEVELOPER KNOWLEDGE
-        "folder_structure",
-        "file_role",
-        "dependency",
-        "setup_step",
-        "workflow",
-        "entrypoint",
-        "command"
-    ]
-
-    print("\nPROJECT CONTEXT SNAPSHOT\n")
-    output_lines = []
-    output_lines.append("PROJECT CONTEXT SNAPSHOT\n")
-    for topic in ordered_topics:
-
-        title = topic.replace("_", " ").title()
-        print(title)
-        output_lines.append(title)
-
-        if topic in topics:
-
-            for item in topics[topic]:
-
-                print(f"- {item}")
-                output_lines.append(f"- {item}")
-
-        else:
-
-            print("- information not available yet")
-            output_lines.append("- information not available yet")
-        print()
-        output_lines.append("")
-
-    snapshot_file = PROCESSED_MEMORY_DIR / "context_snapshot.txt"
-
-    with open(snapshot_file, "w", encoding="utf-8") as f:
-        f.write("\n".join(output_lines))
-
-    print(f"[SNAPSHOT SAVED] {snapshot_file}\n")
-
+    ctx_packets = [p for p in packets if p.get("source") == "context_extraction"]
+    
+    out = ["PROJECT CONTEXT SNAPSHOT\n=========================\n"]
+    for p in ctx_packets: out.append(p.get("content", "") + "\n")
+    
+    text = "\n".join(out)
+    _safe_print(text)
+    
+    with open(PROCESSED_MEMORY_DIR / "context_snapshot.txt", "w", encoding="utf-8") as f:
+        f.write(text)
 
 if __name__ == "__main__":
     main()
