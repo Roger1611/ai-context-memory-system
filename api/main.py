@@ -62,6 +62,26 @@ def _run_pipeline(job_id: str, url: str) -> None:
         # Extract memory packets
         packets = extract_memory_from_conversation(file_path)
 
+        # Validate extraction is not larger than source conversation
+        source_text = "\n".join(m.get("content", "") for m in convo["messages"])
+        source_char_count = len(source_text)
+        source_word_count = len(source_text.split())
+
+        extracted_content = " ".join(p.get("content", "") for p in packets)
+        extracted_char_count = len(extracted_content)
+        extracted_word_count = len(extracted_content.split())
+
+        print(f"[INFO] Source conversation: {source_char_count} chars")
+        print(f"[INFO] Extracted content:   {extracted_char_count} chars")
+
+        if extracted_word_count > source_word_count:
+            raise RuntimeError(
+                f"Extraction out of bounds: extracted {extracted_word_count} words "
+                f"from a {source_word_count}-word conversation "
+                f"({extracted_char_count} chars extracted vs {source_char_count} chars source). "
+                "The model likely fabricated content beyond what was in the conversation."
+            )
+
         # Build snapshot string from packets (no disk write needed)
         ctx_packets = [p for p in packets if p.get("source") == "context_extraction"]
         if not ctx_packets:

@@ -7,7 +7,8 @@ from src.config import PROCESSED_MEMORY_DIR
 
 def _build_snapshot(packets: list[dict]) -> str:
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    header = f"Project Context - generated {timestamp}"
+    source_id = packets[0].get("source_conversation", "unknown") if packets else "unknown"
+    header = f"Project Context - generated {timestamp} - source conversation: {source_id}"
 
     sections = [
         packet.get("content", "").strip()
