@@ -1,4 +1,13 @@
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY", "")
+OPENROUTER_MODEL = os.getenv("OPENROUTER_MODEL", "anthropic/claude-sonnet-4")
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 DATA_DIR = PROJECT_ROOT / "data"
 RAW_CONVO_DIR = DATA_DIR / "raw_conversations"
@@ -23,19 +32,3 @@ RAW_CONVO_DIR.mkdir(parents=True, exist_ok=True)
 PROJECTS_DIR.mkdir(parents=True, exist_ok=True)
 PROJECT_DIR.mkdir(parents=True, exist_ok=True)
 VECTOR_INDEX_DIR.mkdir(parents=True, exist_ok=True)
-# LLM CONFIGURATION
-LLM_PROVIDER = "ollama"
-
-OLLAMA_BASE_URL = "http://localhost:11434"
-
-# Models
-CONTEXT_MODEL = "qwen2.5:7b-instruct-q4_K_M"
-DEV_MODEL = "qwen2.5-coder:7b"
-
-CONTEXT_MODEL_FALLBACKS = [
-    "qwen2.5:3b-instruct",
-    "llama3.2:3b-instruct",
-    "phi3:mini",
-    "gemma2:2b",
-    "qwen2.5:1.5b-instruct",
-]

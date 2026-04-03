@@ -11,5 +11,4 @@ transformers>=4.30
 huggingface-hub>=0.20
 pydantic>=2.0
 python-dotenv>=1.0
-ollama>=0.6
 rich>=13.0

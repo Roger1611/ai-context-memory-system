@@ -1,1 +1,1 @@
-from .ollama_client import generate_response
+from .openrouter_client import generate_response

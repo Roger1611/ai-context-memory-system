@@ -92,26 +92,26 @@ FAISS for vector search
 
 ---
 
-## Running the Project
+## Setup
 
-Install dependencies:
+1. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   playwright install chromium
+   ```
 
-```id="8q1lgd"
-pip install -r requirements.txt
-```
+2. Copy the example env file and add your OpenRouter API key:
+   ```
+   cp .env.example .env
+   # Edit .env and set OPENROUTER_API_KEY
+   ```
 
-Run the pipeline:
+3. Run the pipeline:
+   ```
+   python memory_sync.py
+   ```
 
-```id="p9oxk8"
-python memory_sync.py
-```
-
-The script will ask for:
-
-* a chat share link
-* the source platform (chatgpt / claude / gemini)
-
-After processing the conversation, memory packets and a project snapshot will be generated.
+The script will ask for one or more chat share links and the source platform (chatgpt / claude / gemini).
 
 ---
 
