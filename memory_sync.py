@@ -11,7 +11,8 @@ from src.extraction.memory_extractor import (
     save_memory_packets,
 )
 from src.ingestion.conversation_parser import parse_conversation
-from src.ingestion.fetch_share_link import fetch_share_page
+# HTTP fallback (no Playwright required) — swap back to fetch_share_link for JS-rendered pages
+from src.ingestion.fetch_share_link_http import fetch_share_page
 from src.utils.packet_deduplicator import remove_duplicate_packets
 
 

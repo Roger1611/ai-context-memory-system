@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a0f;
+    color: #ffffff;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    width: 100%;
+    text-align: left;
+    border: none;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  ::selection {
+    background-color: rgba(99, 102, 241, 0.35);
+  }
+}
+
+@layer components {
+  .input-field {
+    @apply w-full h-[52px] px-4 rounded-lg bg-surface border border-border text-white placeholder-muted text-sm
+           focus:outline-none focus:border-accent focus:ring-2 focus:ring-accent/20
+           transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply h-[52px] px-7 rounded-lg font-semibold text-sm text-white whitespace-nowrap
+           bg-gradient-to-r from-accent to-indigo-500
+           shadow-[0_0_20px_rgba(99,102,241,0.25)]
+           hover:from-accent-hover hover:to-indigo-400
+           hover:shadow-[0_0_28px_rgba(99,102,241,0.4)]
+           active:scale-[0.98]
+           transition-all duration-200
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:scale-100;
+  }
+
+  .btn-ghost {
+    @apply h-[44px] px-5 rounded-lg font-medium text-sm text-muted border border-border
+           hover:text-white hover:border-white/20
+           transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #1e293b transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #1e293b;
+    border-radius: 3px;
+  }
+}

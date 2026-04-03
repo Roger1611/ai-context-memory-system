@@ -1,4 +1,5 @@
-from src.ingestion.fetch_share_link import fetch_share_page
+# HTTP fallback (no Playwright required) — swap back to fetch_share_link for JS-rendered pages
+from src.ingestion.fetch_share_link_http import fetch_share_page
 from src.ingestion.conversation_parser import parse_conversation
 from src.utils.id_generator import generate_conversation_id
 from src.config import RAW_CONVO_DIR

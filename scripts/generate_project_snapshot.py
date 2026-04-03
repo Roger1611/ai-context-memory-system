@@ -1,72 +1,31 @@
 import json
+import sys
 from datetime import datetime, timezone
 
-from src.config import OPENROUTER_MODEL, PROCESSED_MEMORY_DIR
-
-SEPARATOR = "=" * 60
+from src.config import PROCESSED_MEMORY_DIR
 
 
 def _build_snapshot(packets: list[dict]) -> str:
-    source_convos = list(dict.fromkeys(
-        p.get("source_conversation", "unknown") for p in packets
-    ))
     timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
-    convo_count = len(source_convos)
+    header = f"Project Context - generated {timestamp}"
 
-    intro = (
-        "This file contains context extracted from "
-        + ("one previous AI conversation" if convo_count == 1 else f"{convo_count} previous AI conversations")
-        + ". It captures the key decisions, current state, open questions, and next actions discussed. "
-        "To continue your work in a new AI session, copy everything below the dashed line and paste it "
-        "at the start of your next conversation."
-    )
-
-    meta = "\n".join([
-        f"Generated:            {timestamp}",
-        f"Source conversations: {convo_count}",
-        f"Model:                {OPENROUTER_MODEL}",
-    ])
-
-    sections = []
-    for i, packet in enumerate(packets, start=1):
-        content = packet.get("content", "").strip()
-        if not content:
-            continue
-        if len(packets) > 1:
-            convo_id = packet.get("source_conversation", "unknown")
-            label = f"{'─' * 40}\nSession {i} (id: {convo_id})\n{'─' * 40}"
-            sections.append(f"{label}\n\n{content}")
-        else:
-            sections.append(content)
-
+    sections = [
+        packet.get("content", "").strip()
+        for packet in packets
+        if packet.get("content", "").strip()
+    ]
     body = "\n\n".join(sections)
 
-    ready_prompt = (
-        "─" * 40 + "\n"
-        "READY-TO-USE PROMPT\n"
-        "─" * 40 + "\n"
-        "Copy and paste the following at the start of your next AI conversation:\n\n"
-        "Here is context from a previous conversation. Please read it carefully before we continue:\n\n"
-        + body
-    )
-
-    return "\n\n".join([
-        intro,
-        SEPARATOR,
-        meta,
-        SEPARATOR,
-        body,
-        SEPARATOR,
-        ready_prompt,
-    ]) + "\n"
+    return header + "\n\n" + body + "\n"
 
 
 def _print_preview(snapshot: str) -> None:
     lines = snapshot.splitlines()
     preview_lines = lines[:60]
-    print("\n" + "\n".join(preview_lines))
+    output = "\n" + "\n".join(preview_lines)
     if len(lines) > 60:
-        print(f"\n... ({len(lines) - 60} more lines — open the file to see the full snapshot)")
+        output += f"\n\n... ({len(lines) - 60} more lines - open the file to see the full snapshot)"
+    sys.stdout.buffer.write(output.encode(sys.stdout.encoding or "utf-8", errors="replace") + b"\n")
 
 
 def main(print_preview: bool = True) -> None:
