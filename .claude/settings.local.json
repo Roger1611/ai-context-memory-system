@@ -3,7 +3,13 @@
     "allow": [
       "Bash(npx tailwindcss:*)",
       "Bash(taskkill //F //PID 11000)",
-      "Bash(netstat -ano)"
+      "Bash(netstat -ano)",
+      "WebFetch(domain:api.apify.com)",
+      "WebFetch(domain:docs.apify.com)",
+      "WebSearch",
+      "WebFetch(domain:apify.com)",
+      "WebFetch(domain:use-apify.com)",
+      "WebFetch(domain:help.apify.com)"
     ]
   }
 }

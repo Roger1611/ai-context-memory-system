@@ -11,8 +11,7 @@ from pydantic import BaseModel
 from api.jobs import create_job, get_job, update_job
 from src.config import RAW_CONVO_DIR
 from src.extraction.memory_extractor import extract_memory_from_conversation
-from src.ingestion.conversation_parser import parse_conversation
-from src.ingestion.fetch_share_link_http import fetch_share_page
+from src.ingestion.fetch_share_link_apify import fetch_share_page
 from scripts.generate_project_snapshot import _build_snapshot
 
 app = FastAPI()
@@ -36,11 +35,8 @@ def _run_pipeline(job_id: str, url: str) -> None:
     try:
         update_job(job_id, "processing")
 
-        # Fetch
-        html = fetch_share_page(url)
-
-        # Parse
-        messages = parse_conversation(html, source="chatgpt")
+        # Fetch and parse (Apify actor returns messages directly)
+        messages = fetch_share_page(url)
 
         # Save raw conversation to disk
         convo_id = str(uuid.uuid4())[:8]
