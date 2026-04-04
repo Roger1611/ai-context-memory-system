@@ -1,5 +1,22 @@
 # CLAUDE.md — AI Context Memory System
 
+## Update Log
+
+### 2026-04-03
+- Switched LLM provider from Ollama to **OpenRouter** (`deepseek/deepseek-v3.2`)
+- Added `src/ingestion/fetch_share_link_http.py` — `requests`-based fetcher, now active in all entry points
+- `fetch_share_link.py` (Playwright) preserved on disk but not wired in; swap comment in `memory_sync.py:14` and `scripts/run_ingestion.py:1` to reactivate
+- Created `api/main.py` and `api/jobs.py` — FastAPI backend with job queue (`POST /extract`, `GET /status/{job_id}`)
+- Created `frontend/` — Vite + React + Tailwind SPA with idle / loading / done / error states
+- Added `requirements-api.txt` and `render.yaml` for Render deployment
+- Rewrote `_build_snapshot()` in `scripts/generate_project_snapshot.py` — clean format: header + raw content only, no separators or READY-TO-USE PROMPT section
+- Fixed `_print_preview()` to use `sys.stdout.buffer` with `errors="replace"` — prevents cp1252 crash on Windows
+- Added source conversation ID to snapshot header line for auditability
+- Added strict grounding constraints to all three prompts in `src/extraction/extraction_prompt.py` — model must only report what is explicitly in the conversation; empty sections must be omitted or labelled "Nothing in this conversation."
+- Added extraction validation in `api/main.py` — raises error if extracted word count exceeds source conversation word count
+
+---
+
 ## Project Overview
 
 A lightweight memory layer that sits on top of AI tools. The system ingests AI chat share links, extracts durable project knowledge using a local LLM, stores it as structured JSON memory packets, indexes them with FAISS embeddings, and generates project snapshots that can be pasted into future AI sessions to restore context instantly.
