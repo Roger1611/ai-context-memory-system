@@ -17,6 +17,7 @@ data/projects/*/vector_index/*
 data/projects/*/context_snapshot.txt
 data/projects/*/developer_snapshot.txt
 data/projects/*/memory_packets.json
+
 # Logs
 *.log
 
@@ -26,3 +27,6 @@ data/projects/*/memory_packets.json
 # OS files
 .DS_Store
 Thumbs.db
+
+# Local Claude Code settings (contains personal API permissions)
+.claude/settings.local.json
