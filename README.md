@@ -1,141 +1,145 @@
-# AI Context Memory System
+# ContextSync — AI Context Memory System
 
-This project explores a simple idea: AI chats contain useful knowledge, but that knowledge disappears once the conversation ends.
+Stop re-explaining your project every time you start a new AI session.
 
-When working on long projects with AI tools like ChatGPT or Claude, I often found myself repeating the same context again and again — explaining the project structure, previous decisions, or results from earlier experiments.
-
-The goal of this project is to experiment with a small system that can capture useful information from AI conversations and store it as reusable project memory.
-
-Instead of treating chats as temporary conversations, the system tries to extract durable information such as:
-
-* project progress
-* architecture decisions
-* repository structure
-* development commands
-* research insights
-
-That information is stored in structured “memory packets” and indexed so it can be retrieved later when working with another AI system.
-
-The idea is that a project’s context can slowly accumulate over time instead of being lost between chats.
+ContextSync extracts durable knowledge from AI chat share links and turns it into a ready-to-paste context snapshot — so your next session picks up exactly where you left off.
 
 ---
 
-## What the System Does
+## What It Does
 
-At a high level the system takes an AI conversation and tries to turn it into reusable knowledge.
+Paste a ChatGPT share link. Get back a structured summary of everything worth carrying forward: decisions made, current state, open tasks, key details. Paste that into any new AI session and you're back up to speed instantly.
 
-1. A share link to an AI chat is provided.
-2. The conversation is downloaded and parsed.
-3. A local LLM analyzes the text and extracts useful project information.
-4. The extracted knowledge is stored as structured memory packets.
-5. Embeddings are generated so the information can be searched later.
-6. A project snapshot summarizing the current state of the project can be generated.
+The system works in two modes:
 
-The final snapshot can be pasted into another AI conversation to quickly restore project context.
+**Web app** — paste a link, get a snapshot in seconds via the hosted frontend  
+**Local pipeline** — ingest multiple conversations, build a FAISS vector index, generate searchable project memory
 
 ---
 
-## Example of Stored Memory
+## How It Works
 
-Information from conversations is stored as small JSON packets.
+1. A ChatGPT share link is submitted
+2. The conversation is fetched via the [Apify ChatGPT extractor](https://apify.com/klinzinger/chatgpt-conversation-extractor) (handles JS-rendered pages)
+3. An LLM (DeepSeek v3 via OpenRouter) extracts structured knowledge
+4. The extracted content is returned as a context snapshot
+5. Paste the snapshot into your next AI session
 
-Example:
+For the local pipeline, extracted packets are also stored as JSON, embedded with `all-MiniLM-L6-v2`, and indexed in FAISS for semantic search.
 
-```id="ex2f7b"
-{
-  "project": "EEG Representation Geometry",
-  "topic": "architecture",
-  "type": "decision",
-  "content": "DeepConvNet was selected as the main backbone for the representation study.",
-  "source_conversation": "bf1b280b.json"
-}
-```
+---
 
-Each packet captures a small piece of project knowledge that may be useful later.
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React + Vite + Tailwind CSS |
+| Backend | FastAPI (Python) |
+| LLM | DeepSeek v3 via OpenRouter |
+| Fetcher | Apify actor (JS-rendered page extraction) |
+| Embeddings | SentenceTransformers (`all-MiniLM-L6-v2`) |
+| Vector search | FAISS |
+| Frontend deploy | Vercel |
+| API deploy | Render |
 
 ---
 
 ## Project Structure
 
-```id="j3fsn9"
-ai-context-memory-system/
-
-memory_sync.py
-
-src/
-  ingestion/
-  extraction/
-  retrieval/
-  utils/
-
-memory/
-  packets/
-  vector_index/
-
-examples/
+```
+contextsync/
+├── memory_sync.py          # Local pipeline entrypoint
+├── api/                    # FastAPI backend
+│   ├── main.py             # POST /extract, GET /status/{job_id}
+│   └── jobs.py             # In-memory job store
+├── frontend/               # Vite + React + Tailwind SPA
+│   └── src/App.jsx
+├── src/
+│   ├── config.py
+│   ├── ingestion/          # Fetchers + conversation parser
+│   ├── extraction/         # LLM prompts + memory extractor
+│   ├── retrieval/          # FAISS index + semantic search
+│   ├── prompt_generation/  # RAG prompt builder
+│   └── utils/
+└── scripts/                # Standalone build/test utilities
 ```
 
-The main pipeline is executed through `memory_sync.py`.
+---
 
-Most of the logic is split across modules inside the `src` directory.
+## Running Locally
+
+### API + Frontend
+
+```bash
+# 1. Clone and install
+git clone https://github.com/Roger1611/ai-context-memory-system
+cd ai-context-memory-system
+
+# 2. Set environment variables
+cp .env.example .env
+# Edit .env:
+#   OPENROUTER_API_KEY=sk-or-...
+#   OPENROUTER_MODEL=deepseek/deepseek-v3.2
+#   APIFY_TOKEN=apify_api_...
+
+# 3. Start the API
+pip install -r requirements-api-lean.txt
+uvicorn api.main:app --port 8000 --reload
+
+# 4. Start the frontend (separate terminal)
+cd frontend
+npm install
+npm run dev
+# → open http://localhost:5173
+```
+
+### Local Pipeline (full memory system)
+
+```bash
+pip install -r requirements.txt
+python memory_sync.py
+# → prompts for share links and platform
+```
 
 ---
 
-## Technologies Used
+## Environment Variables
 
-Python
-Playwright (for fetching share links)
-Ollama for local LLM inference
-Qwen2.5-7B-Instruct
-HuggingFace embedding models
-FAISS for vector search
-
----
-
-## Setup
-
-1. Install dependencies:
-   ```
-   pip install -r requirements.txt
-   playwright install chromium
-   ```
-
-2. Copy the example env file and add your OpenRouter API key:
-   ```
-   cp .env.example .env
-   # Edit .env and set OPENROUTER_API_KEY
-   ```
-
-3. Run the pipeline:
-   ```
-   python memory_sync.py
-   ```
-
-The script will ask for one or more chat share links and the source platform (chatgpt / claude / gemini).
+| Variable | Description |
+|---|---|
+| `OPENROUTER_API_KEY` | Your OpenRouter API key |
+| `OPENROUTER_MODEL` | Model string, e.g. `deepseek/deepseek-v3.2` |
+| `APIFY_TOKEN` | Apify API token for conversation fetching |
 
 ---
 
-## Why I Built This
+## Deploying
 
-This project started as an experiment while working on several AI-assisted research projects.
+**Frontend → Vercel**  
+Connect the `frontend/` directory. Set `VITE_API_URL` to your Render API URL.
 
-I noticed that useful technical discussions were happening inside chat sessions, but there was no easy way to reuse that information later.
-
-The goal here was not to build a full product, but to explore whether it is possible to create a lightweight memory layer that sits on top of AI tools.
+**API → Render**  
+`render.yaml` is included. Set the three environment variables above in the Render dashboard.
 
 ---
 
-## Possible Future Improvements
+## Memory Packet Format
 
-Some ideas that could be explored further:
+The local pipeline stores extracted knowledge as flat JSON packets:
 
-* linking memory across multiple projects
-* ranking or filtering important knowledge
-* building a small UI for browsing stored context
-* automatically injecting memory into prompts
+```json
+{
+  "project": "my_project",
+  "topic": "context_summary",
+  "type": "summary",
+  "content": "...",
+  "source_conversation": "a1b2c3d4",
+  "source": "context_extraction"
+}
+```
 
 ---
 
 ## License
 
-MIT License
+MIT
