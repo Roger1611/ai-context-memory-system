@@ -8,7 +8,7 @@ ContextSync extracts durable knowledge from AI chat share links and turns it int
 
 ## What It Does
 
-Paste a ChatGPT share link. Get back a structured summary of everything worth carrying forward: decisions made, current state, open tasks, key details. Paste that into any new AI session and you're back up to speed instantly.
+Paste a ChatGPT share link. Get back a structured summary of everything worth carrying forward: decisions made, current state, open tasks, key details. Paste that into any new AI session and you're back up to speed!
 
 The system works in two modes:
 
